@@ -9,9 +9,9 @@ class SasaranStrategis extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'sasaranStrategis',
-        'idSurat',
-        'idPengguna',
+        'key',
+        'name',
+        'parent',
         'idPd'
     ];
 }

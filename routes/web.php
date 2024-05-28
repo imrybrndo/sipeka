@@ -1,12 +1,18 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Pengguna\CascadingController;
 use App\Http\Controllers\Pengguna\DashboardPenggunaController;
+use App\Http\Controllers\Pengguna\PohonKinerja\PohonKinerjaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
+});
+
+Route::get('/cetak', function(){
+    return view('pengguna.cetaksurat.index');
 });
 
 Route::get('/dashboard', function () {
@@ -21,14 +27,24 @@ Route::middleware('auth', 'verified', 'role:admin')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth', 'verified', 'role:pengguna')->group(function(){
+Route::middleware('auth', 'verified', 'role:pengguna')->group(function () {
     Route::get('/beranda', [DashboardPenggunaController::class, 'index'])->name('beranda');
-    Route::resource('/pegawai', \App\Http\Controllers\Pengguna\DataPegawaiController::class);
-    Route::resource('/program', \App\Http\Controllers\Pengguna\ProgramController::class);
-    Route::resource('/kegiatan', \App\Http\Controllers\Pengguna\KegiatanController::class);
-    Route::resource('/indikator', \App\Http\Controllers\Pengguna\IndikatorController::class);
+    Route::get('/cascading', [CascadingController::class, 'index'])->name('cascading.index');
+    Route::get('/pohon', [PohonKinerjaController::class, 'index'])->name('pohon.index'); 
 
-    Route::resource('/kinerja', \App\Http\Controllers\Pengguna\SuratPerjanjianKinerja::class);
+    Route::resource('/print', \App\Http\Controllers\Pengguna\CetakSurat\CetakSuratController::class);
+    Route::resource('/pegawai', \App\Http\Controllers\Pengguna\DataPegawaiController::class);
+    Route::resource('/surat', \App\Http\Controllers\Pengguna\SuratPerjanjian\SuratPerjanjianKinerjaController::class);
+    Route::resource('/tujuan', \App\Http\Controllers\Pengguna\Tujuan\TujuanSuratPerjanjianController::class);
+    Route::resource('/sasaran', \App\Http\Controllers\Pengguna\SasaranStrategis\SasaranStrategisSuratController::class);
+    Route::resource('/indikator', \App\Http\Controllers\Pengguna\IndikatorKinerja\IndikatorKinerjaSurat::class);
+    Route::resource('/program', \App\Http\Controllers\Pengguna\ProgramController::class);
+    Route::resource('/realisasi', \App\Http\Controllers\Pengguna\RealisasiAnggaran\RealisasiAnggaranController::class);
+
+    Route::resource('/tujuan_cascading', \App\Http\Controllers\Pengguna\Cascading\TujuanController::class);
+    Route::resource('/sasaran_cascading', \App\Http\Controllers\Pengguna\Cascading\SasaranStrategisController::class);
+    Route::resource('/sasaran_program', \App\Http\Controllers\Pengguna\Cascading\SasaranProgramController::class);
+    Route::resource('/sasaran_kegiatan', \App\Http\Controllers\Pengguna\Cascading\SasaranKegiatanController::class);
 });
 
 // useless routes

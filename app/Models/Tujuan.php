@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tujuan extends Model
 {
@@ -11,7 +12,16 @@ class Tujuan extends Model
     protected $fillable = [
         'tujuan',
         'idSurat',
-        'idPengguna',
-        'idPd',
+        'idPd'
     ];
+    /**
+     * Get all of the comments for the Tujuan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sasaran(): HasMany
+    {
+        return $this->hasMany(SasaranStrategisSurat::class, 'idTujuan');
+    }
 }
+

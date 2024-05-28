@@ -58,6 +58,18 @@
                 <input type="text" name="jabatan" class="input input-bordered w-full" />
             </label>
 
+            <label class="form-control w-full">
+                <div class="label">
+                    <span class="label-text">Status</span>
+                </div>
+                <select class="select select-bordered" name="status">
+                    <option disabled selected>Pilih satu</option>
+                    <option value="kabid">KEPALA BIDANG</option>
+                    <option value="kasub">KEPALA BAGIAN</option>
+                    <option value="walikota">WALIKOTA</option>
+                </select>
+            </label>
+
             <div class="flex gap-2 mt-2">
                 <button type="submit" class="btn btn-neutral">Simpan</button>
                 <a href="{{route('pegawai.index')}}" class="btn">Kembali</a>

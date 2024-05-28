@@ -125,7 +125,8 @@
                             </td>
                             <th>
                                 <div class="flex justify-center items-center gap-2">
-                                    <button class="btn btn-xs" onclick="my_modal_5{{$item->id}}.showModal()">edit</button>
+                                    <button class="btn btn-xs"
+                                        onclick="my_modal_5{{$item->id}}.showModal()">edit</button>
                                     <dialog id="my_modal_5{{$item->id}}" class="modal">
                                         <div class="modal-box w-11/12 max-w-5xl">
                                             <h3 class="font-bold text-lg">Buat Akun Baru</h3>
@@ -139,7 +140,8 @@
                                                         <div class="label">
                                                             <span class="label-text">Nama Perangkat Daerah</span>
                                                         </div>
-                                                        <input name="name" type="text" value="{{old('name', $item->name)}}"
+                                                        <input name="name" type="text"
+                                                            value="{{old('name', $item->name)}}"
                                                             class="input input-bordered w-full" />
                                                     </label>
                                                 </div>
@@ -149,7 +151,8 @@
                                                         <div class="label">
                                                             <span class="label-text">Email</span>
                                                         </div>
-                                                        <input name="email" type="email" value="{{old('email', $item->email)}}"
+                                                        <input name="email" type="email"
+                                                            value="{{old('email', $item->email)}}"
                                                             class="input input-bordered w-full" />
                                                     </label>
                                                 </div>
@@ -159,7 +162,8 @@
                                                         <div class="label">
                                                             <span class="label-text">Nama Pengguna</span>
                                                         </div>
-                                                        <input name="username" type="text" value="{{old('username', $item->username)}}"
+                                                        <input name="username" type="text"
+                                                            value="{{old('username', $item->username)}}"
                                                             class="input input-bordered w-full" />
                                                     </label>
                                                 </div>
@@ -197,7 +201,11 @@
                                             </form>
                                         </div>
                                     </dialog>
-                                    <button class="btn btn-neutral btn-xs">hapus</button>
+                                    <form action="{{route('akun.destroy', $item->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-neutral btn-xs">hapus</button>
+                                    </form>
                                 </div>
                             </th>
                         </tr>

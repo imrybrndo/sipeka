@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class IndikatorTujuan extends Model
+class CasCadingTujuan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'indikatorTujuan',
-        'idSurat',
-        'idPengguna',
+        'key',
+        'name',
+        'parent',
         'idPd'
     ];
 }

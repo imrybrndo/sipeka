@@ -8,8 +8,7 @@
 
     <title>{{ config('app.name', 'K UI') }}</title>
     <!-- add icon link -->
-    <link rel="icon" href="{{asset('assets/logo.png')}}"
-        type="image/x-icon" />
+    <link rel="icon" href="{{asset('assets/logo.png')}}" type="image/x-icon" />
     <!-- Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
@@ -26,7 +25,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
+<body onload="init()" class="font-sans antialiased">
     <div x-data="mainState" :class="{ dark: isDarkMode }" x-on:resize.window="handleWindowResize" x-cloak>
         <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-200">
             <!-- Sidebar -->

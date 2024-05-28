@@ -26,6 +26,28 @@
         </x-slot>
     </x-sidebar.link>
 
+    <x-sidebar.link title="Cascading" href="{{ route('cascading.index') }}"
+        :isActive="request()->routeIs('cascading.index')">
+        <x-slot name="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path fill-rule="evenodd"
+                    d="M2.625 6.75a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0A.75.75 0 0 1 8.25 6h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75ZM2.625 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0ZM7.5 12a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12A.75.75 0 0 1 7.5 12Zm-4.875 5.25a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75Z"
+                    clip-rule="evenodd" />
+            </svg>
+        </x-slot>
+    </x-sidebar.link>
+
+    <x-sidebar.link title="Pohon Kinerja" href="{{ route('pohon.index') }}"
+        :isActive="request()->routeIs('pohon.index')">
+        <x-slot name="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+            </svg>
+        </x-slot>
+    </x-sidebar.link>
+
     <x-sidebar.link title="Data Pegawai" href="{{ route('pegawai.index') }}"
         :isActive="request()->routeIs('pegawai.index')">
         <x-slot name="icon">
@@ -37,7 +59,19 @@
         </x-slot>
     </x-sidebar.link>
 
-    {{-- <x-sidebar.link title="Program" href="{{ route('program.index') }}" :isActive="request()->routeIs('program.index')">
+    <x-sidebar.link title="Perjanjian Kinerja" href="{{ route('surat.index') }}"
+        :isActive="request()->routeIs('surat.index')">
+        <x-slot name="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
+            </svg>
+        </x-slot>
+    </x-sidebar.link>
+    @endif
+
+    <x-sidebar.link title="Program" href="{{ route('program.index') }}" :isActive="request()->routeIs('program.index')">
         <x-slot name="icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
@@ -47,53 +81,14 @@
         </x-slot>
     </x-sidebar.link>
 
-    <x-sidebar.link title="Kegiatan" href="{{ route('kegiatan.index') }}"
-        :isActive="request()->routeIs('kegiatan.index')">
+    <x-sidebar.link title="Realisasi Anggaran" href="{{ route('realisasi.index') }}"
+        :isActive="request()->routeIs('realisasi.index')">
         <x-slot name="icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6">
+                stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122" />
+                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
             </svg>
         </x-slot>
     </x-sidebar.link>
-
-    <x-sidebar.link title="Indikator" href="{{ route('indikator.index') }}"
-        :isActive="request()->routeIs('indikator.index')">
-        <x-slot name="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
-            </svg>
-        </x-slot>
-    </x-sidebar.link> --}}
-
-    <x-sidebar.link title="Surat PK" href="{{ route('kinerja.index') }}"
-    :isActive="request()->routeIs('kinerja.index')">
-    <x-slot name="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
-        </svg>
-    </x-slot>
-</x-sidebar.link>
-
-    @endif
-
-    {{-- <x-sidebar.dropdown title="Menu" :active="Str::startsWith(request()->route()->uri(), 'akun')">
-        <x-slot name="icon">
-            <x-heroicon-o-view-grid class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
-        </x-slot>
-
-        <x-sidebar.sublink title="Akun Pengguna" href="{{ route('akun.index') }}"
-            :active="request()->routeIs('akun.index')" />
-
-        <x-sidebar.sublink title="Icon button" href="{{ route('buttons.icon') }}"
-            :active="request()->routeIs('buttons.icon')" />
-        <x-sidebar.sublink title="Text with icon" href="{{ route('buttons.text-icon') }}"
-            :active="request()->routeIs('buttons.text-icon')" />
-    </x-sidebar.dropdown> --}}
-
 </x-perfect-scrollbar>

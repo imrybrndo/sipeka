@@ -9,9 +9,9 @@ class Program extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'idPd',
         'namaProgram',
         'targetAnggaran',
-        'anggaran'
+        'anggaran',
+        'idPd'
     ];
 }

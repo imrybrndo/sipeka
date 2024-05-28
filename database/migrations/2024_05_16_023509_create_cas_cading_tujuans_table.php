@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tujuans', function (Blueprint $table) {
-            $table->id();
-            $table->string('tujuan');
-            $table->string('idSurat');
-            $table->string('idPengguna');
-            $table->string('idPd');
+        Schema::create('cas_cading_tujuans', function (Blueprint $table) {
+            $table->id('key');
+            $table->string('name');
+            $table->integer('parent');
+            $table->integer('idPd');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tujuans');
+        Schema::dropIfExists('cas_cading_tujuans');
     }
 };

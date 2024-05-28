@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pegawais', function (Blueprint $table) {
+        Schema::create('indikator_surats', function (Blueprint $table) {
             $table->id();
-            $table->string('nip');
-            $table->string('namaPegawai');
-            $table->string('pangkatGolongan');
-            $table->string('jabatan');
-            $table->string('status');
+            $table->string('indikatorKinerja');
+            $table->string('satuan');
+            $table->string('target');
+            $table->string('idSasaran');
+            $table->string('idSurat');
             $table->string('idPd');
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pegawais');
+        Schema::dropIfExists('indikator_surats');
     }
 };

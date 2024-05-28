@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Pengguna;
+namespace App\Http\Controllers\Pengguna\SuratPerjanjian;
 
 use App\Http\Controllers\Controller;
-use App\Models\Indikator;
+use App\Models\Pegawai;
+use App\Models\SasaranStrategisSurat;
+use App\Models\SuratPerjanjian;
+use App\Models\Tujuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class IndikatorController extends Controller
+class SuratPerjanjianKinerjaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +19,14 @@ class IndikatorController extends Controller
      */
     public function index()
     {
-        return view('pengguna.indikator.index');
+        $data = SuratPerjanjian::all();
+        $tujuan = Tujuan::all();
+        $sasaran = SasaranStrategisSurat::all();
+        return view('pengguna.perjanjian.index', [
+            'data' => $data,
+            'tujuan' => $tujuan,
+            'sasaran' => $sasaran
+        ]);
     }
 
     /**
@@ -25,7 +36,8 @@ class IndikatorController extends Controller
      */
     public function create()
     {
-        return view('pengguna.indikator.create');
+        $data = Pegawai::all();
+        return view('pengguna.perjanjian.create', compact('data'));
     }
 
     /**
@@ -36,16 +48,20 @@ class IndikatorController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, []);
-
-        Indikator::create([
-            'namaIndikator' => $request->namaIndikator,
-            'satuanIndikator' => $request->satuanIndikator,
-            'sifatIndikator' => $request->sifatIndikator,
-            'tipeIndikator' => $request->tipeIndikator,
-            'idPd' => auth()->user()->id
+        $this->validate($request, [
+            'pihakPertama' => 'required',
+            'jabatanPihakPertama' => 'required',
+            'pihakKedua' => 'required',
+            'jabatanPihakKedua' => 'required'
         ]);
-        return view('pengguna.indikator.index')->with('toast_success', 'Indikator berhasil disimpan');
+
+        SuratPerjanjian::create([
+            'pihakPertama' => $request->pihakPertama,
+            'jabatanPihakPertama' => $request->jabatanPihakPertama,
+            'pihakKedua' => $request->pihakKedua,
+            'jabatanPihakKedua' => $request->jabatanPihakKedua
+        ]);
+        return redirect()->route('surat.index')->with('toast_success', 'Surat perjanjian berhasil dibuat!');
     }
 
     /**
@@ -90,6 +106,8 @@ class IndikatorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = SuratPerjanjian::findOrFail($id);
+        $data->delete();
+        return redirect()->route('surat.index')->with('toast_success', 'Berhasil');
     }
 }

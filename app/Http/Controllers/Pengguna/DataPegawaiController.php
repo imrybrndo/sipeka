@@ -53,6 +53,7 @@ class DataPegawaiController extends Controller
             'nip' => 'required',
             'namaPegawai' => 'required',
             'pangkatGolongan' => 'required',
+            'status' => 'required',
             'jabatan' => 'required'
         ]);
 
@@ -61,6 +62,7 @@ class DataPegawaiController extends Controller
             'namaPegawai' => $request->namaPegawai,
             'pangkatGolongan' => $request->pangkatGolongan,
             'jabatan' => $request->jabatan,
+            'status' => $request->status,
             'idPd' => auth()->user()->id
         ]);
 
@@ -102,6 +104,7 @@ class DataPegawaiController extends Controller
             'nip' => 'required',
             'namaPegawai' => 'required',
             'pangkatGolongan' => 'required',
+            'status' => 'required',
             'jabatan' => 'required'
         ]);
         $data = Pegawai::findOrFail($id);
@@ -110,6 +113,7 @@ class DataPegawaiController extends Controller
             'namaPegawai' => $request->namaPegawai,
             'pangkatGolongan' => $request->pangkatGolongan,
             'jabatan' => $request->jabatan,
+            'status' => $request->status,
             'idPd' => auth()->user()->id
         ]);
         return redirect()->route('pegawai.index')->with('toast_success', 'Data pegawai berhasil diubah!');

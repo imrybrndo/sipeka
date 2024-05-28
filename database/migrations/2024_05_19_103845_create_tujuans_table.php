@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('indikators', function (Blueprint $table) {
+        Schema::create('tujuans', function (Blueprint $table) {
             $table->id();
-            $table->string('namaIndikator');
-            $table->string('satuanIndikator');
-            $table->string('sifatIndikator');
-            $table->string('tipeIndikator');
+            $table->string('tujuan');
+            $table->string('idSurat');
             $table->string('idPd');
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indikators');
+        Schema::dropIfExists('tujuans');
     }
 };

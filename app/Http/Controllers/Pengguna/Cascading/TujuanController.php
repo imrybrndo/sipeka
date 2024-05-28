@@ -1,31 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Pengguna\Cascading;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\CasCadingTujuan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-
-class CreateUserAccountController extends Controller
+class TujuanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $no = 1;
-        $search = $request->input('search');
-        $data = User::where('name', 'LIKE', "%{$search}%")
-            ->orWhere('email', 'LIKE', "%{$search}%")
-            ->paginate(10);
-        return view('admin.akun.index', [
-            'data' => $data,
-            'no' => $no
-        ]);
+        //
     }
 
     /**
@@ -35,7 +25,7 @@ class CreateUserAccountController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -46,23 +36,17 @@ class CreateUserAccountController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'email', 'max:255'],
-                'username' => ['required', 'string', 'max:255'],
-                'password' => ['required', 'min:8']
+        $this->validate($request, [
+            'tujuan.*' => 'required'
         ]);
-        if ($validator->fails()) {
-            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+        foreach ($request->input('tujuan') as $tujuan) {
+            CasCadingTujuan::create([
+                'name' => $tujuan,
+                'parent' => 1,
+                'idPd' => auth()->user()->id
+            ]);
         }
-        $data = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-        ]);
-        $data->assignRole('pengguna');
-        return redirect()->route('akun.index')->with('toast_success', 'Akun berhasil dibuat!!');
+        return redirect()->route('cascading.index')->with('toast_success', 'Berhasil');
     }
 
     /**
@@ -107,9 +91,8 @@ class CreateUserAccountController extends Controller
      */
     public function destroy($id)
     {
-        $data = User::findOrFail($id);
+        $data = CasCadingTujuan::findOrFail($id);
         $data->delete();
-        return redirect()->route('akun.index')->with('toast_success', 'Akun berhasil dihapus!');
-
+        return redirect()->route('cascading.index')->with('toast_success', 'Tujuan berhasil dihapus!');
     }
 }

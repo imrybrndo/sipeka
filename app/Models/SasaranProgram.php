@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pegawai extends Model
+class SasaranProgram extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nip',
-        'namaPegawai',
-        'pangkatGolongan',
-        'jabatan',
-        'status',
+        'key',
+        'name',
+        'parent',
         'idPd'
     ];
 }
