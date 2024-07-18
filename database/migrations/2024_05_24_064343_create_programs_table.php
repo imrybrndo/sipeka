@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('namaProgram');
+            $table->string('triwulan1');
+            $table->string('triwulan2');
+            $table->string('triwulan3');
+            $table->string('triwulan4');
             $table->string('targetAnggaran');
             $table->string('anggaran');
             $table->string('idPd');

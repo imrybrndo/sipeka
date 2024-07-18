@@ -37,18 +37,32 @@ class SasaranKegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'sasaranKegiatan.*' => 'required'
         ]);
-        $lastKey = SasaranProgram::max('key');
-        foreach ($request->input('sasaranKegiatan') as $kegiatan) {
-            $lastKey++;
-            SasaranKegiatan::create([
-                'key' => $lastKey,
-                'name' => $kegiatan,
-                'parent' => $request->input('sasaranProgram'),
-                'idPd' => auth()->user()->id
-            ]);
+        $existData = SasaranKegiatan::exists();
+        if ($existData) {
+            $max_key = SasaranKegiatan::max('key');
+            foreach ($request->input('sasaranKegiatan') as $kegiatan) {
+                $max_key++;
+                SasaranKegiatan::create([
+                    'key' => $max_key,
+                    'name' => $kegiatan,
+                    'parent' => $request->input('sasaranProgram'),
+                    'idPd' => auth()->user()->id
+                ]);
+            }
+        } elseif (!$existData) {
+            $lastKey = SasaranProgram::max('key');
+            foreach ($request->input('sasaranKegiatan') as $kegiatan) {
+                $lastKey++;
+                SasaranKegiatan::create([
+                    'key' => $lastKey,
+                    'name' => $kegiatan,
+                    'parent' => $request->input('sasaranProgram'),
+                    'idPd' => auth()->user()->id
+                ]);
+            }
         }
         return redirect()->route('cascading.index')->with('toast_success', 'Berhasil!!');
     }
@@ -95,6 +109,8 @@ class SasaranKegiatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = SasaranKegiatan::where('key', $id);
+        $data->delete();
+        return redirect()->route('cascading.index')->with('toast_success', 'Berhasil!!');
     }
 }

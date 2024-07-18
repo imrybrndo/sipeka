@@ -40,16 +40,30 @@ class SasaranStrategisController extends Controller
         $this->validate($request, [
             'sasaranStrategis.*' => 'required'
         ]);
-        $sumSasaran = CasCadingTujuan::latest()->first();
-        $lastkey = $sumSasaran ? $sumSasaran->key : 0;
-        foreach ($request->input('sasaranStrategis') as $strategis) {
-            $lastkey++;
-            SasaranStrategis::create([
-                'key' => $lastkey,
-                'name' => $strategis,
-                'parent' => $request->input('tujuan'),
-                'idPd' => auth()->user()->id
-            ]);
+        $existsData = SasaranStrategis::exists();
+        if ($existsData) {
+            $max_key = SasaranStrategis::max('key');
+            foreach ($request->input('sasaranStrategis') as $strategis) {
+                $max_key++;
+                SasaranStrategis::create([
+                    'key' => $max_key,
+                    'name' => $strategis,
+                    'parent' => $request->input('tujuan'),
+                    'idPd' => auth()->user()->id
+                ]);
+            }
+        } elseif (!$existsData) {
+            $sumSasaran = CasCadingTujuan::latest()->first();
+            $lastkey = $sumSasaran ? $sumSasaran->key : 0;
+            foreach ($request->input('sasaranStrategis') as $strategis) {
+                $lastkey++;
+                SasaranStrategis::create([
+                    'key' => $lastkey,
+                    'name' => $strategis,
+                    'parent' => $request->input('tujuan'),
+                    'idPd' => auth()->user()->id
+                ]);
+            }
         }
         return redirect()->route('cascading.index')->with('toast_success', 'Sasaran strategis berhasil ditambah!');
     }
@@ -96,6 +110,8 @@ class SasaranStrategisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = SasaranStrategis::where('key', $id);
+        $data->delete();
+        return redirect()->route('cascading.index')->with('toast_success', 'Berhasil!!');
     }
 }

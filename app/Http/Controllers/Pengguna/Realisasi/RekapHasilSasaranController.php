@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Pengguna\CetakSurat;
+namespace App\Http\Controllers\Pengguna\Realisasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Program;
 use App\Models\SasaranStrategisSurat;
-use App\Models\SuratPerjanjian;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class CetakSuratController extends Controller
+class RekapHasilSasaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -60,18 +59,7 @@ class CetakSuratController extends Controller
      */
     public function edit($id)
     {
-        $no = 1;
-        $data = SuratPerjanjian::where('id', $id)->first();
-        $surat = SasaranStrategisSurat::with('indikator')->where('idSurat', $id)->get();
-        $program = Program::where('id')->get();
-        $arr = $surat->toArray();
-        return view('pengguna.cetaksurat.index', [
-            'no' => $no,
-            'data' => $data,
-            'surat' => $surat,
-            'program' => $program,
-            'arr' => $arr
-        ]);
+        //
     }
 
     /**
@@ -83,7 +71,15 @@ class CetakSuratController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $userID = auth()->user()->id;
+        $nilaiSasaran = SasaranStrategisSurat::where('idSurat', $id)->sum('nilai');
+        $jumlahSasaran = SasaranStrategisSurat::where('idSurat', $id)->count();
+        $hasilSasaranStrategis = $nilaiSasaran / $jumlahSasaran;
+        $data = User::findOrFail($userID);
+        $data->update([
+            'capaianPd' => $hasilSasaranStrategis
+        ]);
+        return redirect()->route('realisasi.index')->with('toast_success', 'Berhasil!!');
     }
 
     /**

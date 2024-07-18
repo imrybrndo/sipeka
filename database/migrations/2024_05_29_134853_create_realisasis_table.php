@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('indikator_surats', function (Blueprint $table) {
+        Schema::create('realisasis', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori');
-            $table->string('indikatorKinerja');
-            $table->string('satuan');
+            $table->string('sasaranStrategis');
+            $table->string('indikator');
+            $table->string('nilai');
             $table->string('target');
-            $table->integer('idSasaran');
-            $table->integer('idSurat');
-            $table->integer('idPd');
+            $table->string('realisasi');
+            $table->string('idPd');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indikator_surats');
+        Schema::dropIfExists('realisasis');
     }
 };

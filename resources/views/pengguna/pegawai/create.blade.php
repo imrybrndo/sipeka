@@ -63,10 +63,18 @@
                     <span class="label-text">Status</span>
                 </div>
                 <select class="select select-bordered" name="status">
-                    <option disabled selected>Pilih satu</option>
-                    <option value="kabid">KEPALA BIDANG</option>
-                    <option value="kasub">KEPALA BAGIAN</option>
-                    <option value="walikota">WALIKOTA</option>
+                    <option>Pilih</option>
+                    <option value="SEKRETARIS DAERAH">SEKRETARIS DAERAH</option>
+                    <option value="KETUA SEKRETARIS DEWAN">KETUA SEKRETARIS DEWAN</option>
+                    <option value="ASISTEN SEKRETARIS DAERAH">ASISTEN SEKRETARIS DAERAH</option>
+                    <option value="KEPALA BADAN">KEPALA BADAN</option>
+                    <option value="KEPALA DINAS">KEPALA DINAS</option>
+                    <option value="CAMAT">CAMAT</option>
+                    <option value="KEPALA BAGIAN">KEPALA BAGIAN</option>
+                    <option value="KEPALA BIDANG">KEPALA BIDANG</option>
+                    <option value="JABATAN FUNGSIONAL">JABATAN FUNGSIONAL</option>
+                    <option value="KEPALA SEKSI">KEPALA SEKSI</option>
+                    <option value="JABATAN PELAKSANA">JABATAN PELAKSANA</option>
                 </select>
             </label>
 

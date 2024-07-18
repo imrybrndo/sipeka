@@ -43,8 +43,8 @@ class SasaranStrategisSuratController extends Controller
         $data = $request->all();
         foreach ($data['sasaranStrategis'] as $key => $value) {
             $sasaranStrategis = new SasaranStrategisSurat();
+            $sasaranStrategis->kategori = $request->kategori;
             $sasaranStrategis->sasaranStrategis = $value;
-            $sasaranStrategis->idTujuan = $request->idSurat;
             $sasaranStrategis->idSurat = $request->idSurat;
             $sasaranStrategis->idPd = auth()->user()->id;
             $sasaranStrategis->save();
@@ -83,7 +83,13 @@ class SasaranStrategisSuratController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = SasaranStrategisSurat::findOrFail($id);
+        $data->update([
+            'sasaranStrategis' => $request->sasaranStrategis
+        ]);
+        return redirect()->route('surat.index')->with('toast_success', 'Berhasil!');
+        // $data = SasaranStrategisSurat::findOrFail($id);
+
     }
 
     /**

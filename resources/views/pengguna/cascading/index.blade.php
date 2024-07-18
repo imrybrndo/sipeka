@@ -15,7 +15,9 @@
                     Tujuan
                 </div>
                 <div class="collapse-content">
-                    <form action="{{route('tujuan_cascading.store')}}" method="POST">
+                    <?php
+                    if (!empty($tujuanCascading)) {?>
+                    <form action="{{ route('tujuan_cascading.store') }}" method="POST">
                         @csrf
                         {{-- <a class="btn btn-xs mt-3" onclick="addInputField()">
                             Tambah
@@ -26,9 +28,9 @@
                                     <div class="label">
                                         <span class="label-text mb-0">Tujuan</span>
                                     </div>
-                                    @for ($i = 1; $i <= 1; $i++) <input type="text" name="tujuan[]"
-                                        class="input input-bordered w-full mt-2">
-                                        @endfor
+                                    @for ($i = 1; $i <= 1; $i++)
+                                        <input type="text" name="tujuan[]" class="input input-bordered w-full mt-2">
+                                    @endfor
                                 </div>
                             </label>
                             <script>
@@ -44,9 +46,12 @@
                             </script>
                         </label>
                         <div class="flex justify-end items-end mt-2">
-                            <button class="btn btn-success btn-block text-white mb-3">Simpan</button>
+                            <button class="btn btn-neutral btn-block text-white mb-3">Simpan</button>
                         </div>
                     </form>
+                    <?php } ?>
+
+
                 </div>
             </div>
 
@@ -56,7 +61,7 @@
                     Sasaran Strategis
                 </div>
                 <div class="collapse-content">
-                    <form action="{{route('sasaran_cascading.store')}}" method="post">
+                    <form action="{{ route('sasaran_cascading.store') }}" method="post">
                         @csrf
                         <label class="form-control w-full">
                             <div class="label">
@@ -65,7 +70,7 @@
                             <select class="select select-bordered" name="tujuan">
                                 <option disabled selected>Pilih Tujuan</option>
                                 @foreach ($tujuanCascading as $itemTujuan)
-                                <option value="{{$itemTujuan->key}}">{{$itemTujuan->name}}</option>
+                                    <option value="{{ $itemTujuan->key }}">{{ $itemTujuan->name }}</option>
                                 @endforeach
                             </select>
                         </label>
@@ -79,9 +84,10 @@
                                     <div class="label">
                                         <span class="label-text mb-0">Sasaran Strategis</span>
                                     </div>
-                                    @for ($i = 1; $i <= 1; $i++) <input type="text" name="sasaranStrategis[]"
-                                        class="input input-bordered w-full mt-2">
-                                        @endfor
+                                    @for ($i = 1; $i <= 1; $i++)
+                                        <input type="text" name="sasaranStrategis[]"
+                                            class="input input-bordered w-full mt-2">
+                                    @endfor
                                 </div>
                             </label>
                             <script>
@@ -97,7 +103,7 @@
                             </script>
                         </label>
                         <div class="flex justify-end mt-3">
-                            <button class="btn btn-success btn-block text-white mb-3">Simpan</button>
+                            <button class="btn btn-neutral btn-block text-white mb-3">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -109,7 +115,7 @@
                     Sasaran Program
                 </div>
                 <div class="collapse-content">
-                    <form action="{{route('sasaran_program.store')}}" method="post">
+                    <form action="{{ route('sasaran_program.store') }}" method="post">
                         @csrf
                         <label class="form-control w-full">
                             <div class="label">
@@ -118,7 +124,7 @@
                             <select name="sasaranStrategis" class="select select-bordered">
                                 <option disabled selected>Pilih Sasaran</option>
                                 @foreach ($strategis as $itemStrategis)
-                                <option value="{{$itemStrategis->key}}">{{$itemStrategis->name}}</option>
+                                    <option value="{{ $itemStrategis->key }}">{{ $itemStrategis->name }}</option>
                                 @endforeach
                             </select>
                         </label>
@@ -132,9 +138,10 @@
                                     <div class="label">
                                         <span class="label-text mb-0">Sasaran Program</span>
                                     </div>
-                                    @for ($i = 1; $i <= 1; $i++) <input type="text" name="sasaranProgram[]"
-                                        class="input input-bordered w-full mt-2">
-                                        @endfor
+                                    @for ($i = 1; $i <= 1; $i++)
+                                        <input type="text" name="sasaranProgram[]"
+                                            class="input input-bordered w-full mt-2">
+                                    @endfor
                                 </div>
                             </label>
                             <script>
@@ -150,7 +157,7 @@
                             </script>
                         </label>
                         <div class="flex justify-end mt-3">
-                            <button class="btn btn-block btn-success text-white mb-3">Simpan</button>
+                            <button class="btn btn-block btn-neutral text-white mb-3">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -162,7 +169,7 @@
                     Sasaran Kegiatan
                 </div>
                 <div class="collapse-content">
-                    <form action="{{route('sasaran_kegiatan.store')}}" method="post">
+                    <form action="{{ route('sasaran_kegiatan.store') }}" method="post">
                         @csrf
                         <label class="form-control w-full">
                             <div class="label">
@@ -171,7 +178,7 @@
                             <select name="sasaranProgram" class="select select-bordered">
                                 <option disabled selected>Pilih Sasaran</option>
                                 @foreach ($program as $itemProgram)
-                                <option value="{{$itemProgram->key}}">{{$itemProgram->name}}</option>
+                                    <option value="{{ $itemProgram->key }}">{{ $itemProgram->name }}</option>
                                 @endforeach
                             </select>
                         </label>
@@ -185,9 +192,10 @@
                                     <div class="label">
                                         <span class="label-text mb-0">Sasaran Kegiatan</span>
                                     </div>
-                                    @for ($i = 1; $i <= 1; $i++) <input type="text" name="sasaranKegiatan[]"
-                                        class="input input-bordered w-full mt-2">
-                                        @endfor
+                                    @for ($i = 1; $i <= 1; $i++)
+                                        <input type="text" name="sasaranKegiatan[]"
+                                            class="input input-bordered w-full mt-2">
+                                    @endfor
                                 </div>
                             </label>
                             <script>
@@ -203,7 +211,7 @@
                             </script>
                         </label>
                         <div class="flex justify-end mt-3">
-                            <button class="btn btn-block btn-success text-white">Simpan</button>
+                            <button class="btn btn-block btn-neutral text-white">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -211,124 +219,9 @@
         </div>
     </div>
 
-    <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mt-4">
-        {{-- DATA TUJUAN --}}
-        <section>
-            <p class="text-center mb-2 font-semibold">TUJUAN</p>
-            <table class="table">
-                <thead class=" bg-gray-300">
-                    <tr>
-                        <th>No</th>
-                        <th class="text-center">Tujuan</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($tujuanCascading as $itemTujuan)
-                    <tr>
-                        <td>+</td>
-                        <td>{{$itemTujuan->name}}</td>
-                        <td>
-                            <div class="flex justify-center items-center gap-2">
-                                <button class="btn">edit</button>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </section>
-    </div>
-
-    <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mt-4">
-        {{-- DATA SASARAN STRATEGIS --}}
-        <section>
-            <p class="text-center mb-2 font-semibold">SASARAN STRATEGIS</p>
-            <table class="table">
-                <thead class=" bg-gray-300">
-                    <tr>
-                        <th>No</th>
-                        <th class="text-center">Tujuan</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($strategis as $itemStrategis)
-                    <tr>
-                        <td>+</td>
-                        <td>{{$itemStrategis->name}}</td>
-                        <td>
-                            <div class="flex justify-center items-center gap-2">
-                                <button class="btn">edit</button>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </section>
-    </div>
-
-    <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mt-4">
-        {{-- DATA PROGRAM --}}
-        <section>
-            <p class="text-center mb-2 font-semibold">SASARAN PROGRAM</p>
-            <table class="table">
-                <thead class=" bg-gray-300">
-                    <tr>
-                        <th>No</th>
-                        <th class="text-center">Tujuan</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($program as $itemProgram)
-                    <tr>
-                        <td>+</td>
-                        <td>{{$itemProgram->name}}</td>
-                        <td>
-                            <div class="flex justify-center items-center gap-2">
-                                <button class="btn">edit</button>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </section>
-    </div>
-
-    <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mt-4">
-        {{-- DATA KEGIATAN --}}
-        <section>
-            <p class="text-center mb-2 font-semibold">SASARAN KEGIATAN</p>
-            <table class="table">
-                <thead class=" bg-gray-300">
-                    <tr>
-                        <th>No</th>
-                        <th class="text-center">Tujuan</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($kegiatan as $itemKegiatans)
-                    <tr>
-                        <td>+</td>
-                        <td>{{$itemKegiatans->name}}</td>
-                        <td>
-                            <div class="flex justify-center items-center gap-2">
-                                <button class="btn">edit</button>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </section>
-    </div>
-
-    <form action="">
-        <button class="btn btn-block bg-red-700 text-white mt-4 mb-4">Hapus Semua</button>
+    <form action="{{ route('hapus_cascading.destroy', $id) }}" method="post">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-block bg-red-700 text-white mt-4">Hapus</button>
     </form>
-
 </x-app-layout>

@@ -61,32 +61,9 @@
                     </x-form.input-with-icon-wrapper>
                 </div>
 
-                <!-- Remember Me -->
-                <div class="flex items-center justify-between">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input
-                            id="remember_me"
-                            type="checkbox"
-                            class="text-red-700 border-gray-300 rounded focus:border-purple-300 focus:ring focus:ring-red-700 dark:border-gray-600 dark:bg-dark-eval-1 dark:focus:ring-offset-dark-eval-1"
-                            name="remember"
-                        >
-
-                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                            {{ __('Ingat saya') }}
-                        </span>
-                    </label>
-
-                    @if (Route::has('password.request'))
-                        <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">
-                            {{ __('Lupa kata sandi anda?') }}
-                        </a>
-                    @endif
-                </div>
-
-                <div>
-                    <x-button class="justify-center w-full gap-2 bg-red-700 hover:bg-neutral">
+                <div class="mt-3">
+                    <x-button class="justify-center w-full gap-2 bg-red-700">
                         <x-heroicon-o-login class="w-6 h-6" aria-hidden="true" />
-
                         <span>{{ __('Masuk') }}</span>
                     </x-button>
                 </div>

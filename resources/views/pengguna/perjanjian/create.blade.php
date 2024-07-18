@@ -23,9 +23,9 @@
 
             <label class="form-control w-full">
                 <div class="label">
-                    <span class="label-text">JABATAN PIHAK KEDUA</span>
+                    <span class="label-text">JABATAN PIHAK PERTAMA</span>
                 </div>
-                <input name="jabatanPihakPertama" type="text" placeholder="Type here"
+                <input name="jabatanPihakPertama" type="text"
                     class="input input-bordered w-full" />
             </label>
 

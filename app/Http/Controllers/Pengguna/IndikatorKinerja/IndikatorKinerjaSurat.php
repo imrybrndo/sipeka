@@ -46,6 +46,7 @@ class IndikatorKinerjaSurat extends Controller
         $data = $request->all();
         foreach ($data['indikatorKinerja'] as $index => $itemIndikator) {
             $indikatorKinerja = new IndikatorSurat();
+            $indikatorKinerja->kategori = $request->kategori;
             $indikatorKinerja->indikatorKinerja = $itemIndikator;
             $indikatorKinerja->satuan = $data['satuan'][$index];
             $indikatorKinerja->target = $data['target'][$index];
@@ -76,7 +77,7 @@ class IndikatorKinerjaSurat extends Controller
      */
     public function edit($id)
     {
-        //
+        var_dump($id);
     }
 
     /**

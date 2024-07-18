@@ -10,27 +10,185 @@
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
         <div class="stats shadow w-full bg-red-700 text-white">
             <div class="stat">
-                <div class="stat-title text-white font-semibold">PEGAWAI</div>
-                <div class="stat-value">89,400</div>
-                <div class="stat-desc text-white">Jumlah Pegawai</div>
+                @if ($capaianPd >= 0.8)
+                    <div class="stat-title text-white font-semibold">GRADE</div>
+                    <div class="stat-value">A</div>
+                @elseif($capaianPd <= 0.8 || $capaianPd >= 0.6)
+                    <div class="stat-title text-white font-semibold">GRADE</div>
+                    <div class="stat-value">B</div>
+                @elseif($capaianPd < 0.6)
+                    <div class="stat-title text-white font-semibold">GRADE</div>
+                    <div class="stat-value">B</div>
+                @endif
             </div>
         </div>
 
         <div class="flex justify-center items-center mt-2 gap-2">
             <div class="stats shadow w-full">
                 <div class="stat">
-                    <div class="stat-title font-semibold">REALISASI ANGGARAN</div>
-                    <div class="stat-value">89,400</div>
-                    <div class="stat-desc ">Jumlah Pegawai</div>
+                    <div class="stat-title text-black font-semibold">REALISASI ANGGARAN</div>
+                    @if ($grade <= 0.03)
+                        <div class="stat-value text-green-700">{{ $grade }}%</div>
+                        <div class="stat-desc text-green-500">Efektif</div>
+                    @elseif ($grade > 0.03 || $grade <= 0.1)
+                        <div class="stat-value text-yellow-700">{{ $grade }}%</div>
+                        <div class="stat-desc text-yellow-500">Non-Efektif</div>
+                    @elseif($grade > 0.1)
+                        <div class="stat-value text-red-700">{{ $grade }}%</div>
+                        <div class="stat-desc text-red-500">Boros</div>
+                    @endif
                 </div>
             </div>
 
             <div class="stats shadow w-full">
                 <div class="stat">
-                    <div class="stat-title font-semibold">PERJANJIAN KINERJA</div>
-                    <div class="stat-value">89,400</div>
-                    <div class="stat-desc">Jumlah Perjanjian Kinerja</div>
+                    <div class="stat-title text-black font-semibold">REALISASI KINERJA</div>
+                    <div class="stat-value">{{$capaianPd}}%</div>
+                    <div class="stat-desc">Realisasi Kinerja</div>
                 </div>
             </div>
         </div>
+
+        {{-- <div class="overflow-x-auto mt-3">
+            <table class="table">
+                <!-- head -->
+                <thead class="text-black">
+                    <tr>
+                        <th>
+                            No
+                        </th>
+                        <th>Name</th>
+                        <th>Job</th>
+                        <th>Favorite Color</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row 1 -->
+                    <tr>
+                        <th>
+                            <label>
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                        </th>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div class="mask mask-squircle w-12 h-12">
+                                        <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
+                                            alt="Avatar Tailwind CSS Component" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="font-bold">Hart Hagerty</div>
+                                    <div class="text-sm opacity-50">United States</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            Zemlak, Daniel and Leannon
+                            <br />
+                            <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                        </td>
+                        <td>Purple</td>
+                        <th>
+                            <button class="btn btn-ghost btn-xs">details</button>
+                        </th>
+                    </tr>
+                    <!-- row 2 -->
+                    <tr>
+                        <th>
+                            <label>
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                        </th>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div class="mask mask-squircle w-12 h-12">
+                                        <img src="https://img.daisyui.com/tailwind-css-component-profile-3@56w.png"
+                                            alt="Avatar Tailwind CSS Component" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="font-bold">Brice Swyre</div>
+                                    <div class="text-sm opacity-50">China</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            Carroll Group
+                            <br />
+                            <span class="badge badge-ghost badge-sm">Tax Accountant</span>
+                        </td>
+                        <td>Red</td>
+                        <th>
+                            <button class="btn btn-ghost btn-xs">details</button>
+                        </th>
+                    </tr>
+                    <!-- row 3 -->
+                    <tr>
+                        <th>
+                            <label>
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                        </th>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div class="mask mask-squircle w-12 h-12">
+                                        <img src="https://img.daisyui.com/tailwind-css-component-profile-4@56w.png"
+                                            alt="Avatar Tailwind CSS Component" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="font-bold">Marjy Ferencz</div>
+                                    <div class="text-sm opacity-50">Russia</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            Rowe-Schoen
+                            <br />
+                            <span class="badge badge-ghost badge-sm">Office Assistant I</span>
+                        </td>
+                        <td>Crimson</td>
+                        <th>
+                            <button class="btn btn-ghost btn-xs">details</button>
+                        </th>
+                    </tr>
+                    <!-- row 4 -->
+                    <tr>
+                        <th>
+                            <label>
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                        </th>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div class="mask mask-squircle w-12 h-12">
+                                        <img src="https://img.daisyui.com/tailwind-css-component-profile-5@56w.png"
+                                            alt="Avatar Tailwind CSS Component" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="font-bold">Yancy Tear</div>
+                                    <div class="text-sm opacity-50">Brazil</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            Wyman-Ledner
+                            <br />
+                            <span class="badge badge-ghost badge-sm">Community Outreach Specialist</span>
+                        </td>
+                        <td>Indigo</td>
+                        <th>
+                            <button class="btn btn-ghost btn-xs">details</button>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div> --}}
 </x-app-layout>

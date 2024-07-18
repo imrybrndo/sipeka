@@ -24,25 +24,27 @@
       function init() {
         var jsonData = {!! $jsonData !!};
         console.log(jsonData);
-            var $ = go.GraphObject.make;
+          var $ = go.GraphObject.make; 
             var myDiagram =
                 $(go.Diagram, "myDiagram",
                     {
                         initialContentAlignment: go.Spot.Center,
-                        layout: $(go.TreeLayout, { angle: 90, layerSpacing: 50 }),
-                        "undoManager.isEnabled": true
+                        "undoManager.isEnabled": true,
+                        layout: $(go.TreeLayout, { angle: 90, layerSpacing: 35, nodeSpacing: 30 }) // Menambahkan tata letak untuk membuat diagram lebih rapi
                     });
+
             myDiagram.nodeTemplate =
                 $(go.Node, "Auto",
-                    $(go.Shape, "Rectangle", { fill: "white", portId: "", cursor: "pointer", fromLinkable: true, toLinkable: true }),
-                    $(go.TextBlock, { margin: 10 },
+                    $(go.Shape, "RoundedRectangle", { fill: "lightblue" }),
+                    $(go.TextBlock, { margin: 8, textAlign: "center", width: 100 }, // Menambahkan width agar teks berada di dalam kotak
                         new go.Binding("text", "name"))
                 );
+
             myDiagram.linkTemplate =
                 $(go.Link,
-                    $(go.Shape),
-                    $(go.Shape, { toArrow: "Standard" })
-                );
+                    { routing: go.Link.Orthogonal, corner: 5 },
+                    $(go.Shape, { strokeWidth: 3, stroke: "#555" }));
+
             var nodeDataArray = jsonData.map(function(item) {
                 return {
                     key: item.key,

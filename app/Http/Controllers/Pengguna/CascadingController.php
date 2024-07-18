@@ -22,6 +22,7 @@ class CascadingController extends Controller
 
         return view('pengguna.cascading.index', [
             'no' => $no,
+            'id' => $id,
             'tujuanCascading' => $tujuanCascading,
             'strategis' => $sasaranStrategis,
             'program' => $sasaranProgram,

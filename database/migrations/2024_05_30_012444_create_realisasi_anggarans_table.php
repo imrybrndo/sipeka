@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('indikator_surats', function (Blueprint $table) {
+        Schema::create('realisasi_anggarans', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori');
-            $table->string('indikatorKinerja');
-            $table->string('satuan');
-            $table->string('target');
-            $table->integer('idSasaran');
-            $table->integer('idSurat');
-            $table->integer('idPd');
+            $table->string('realisasiFisik');
+            $table->string('triwulan1');
+            $table->string('triwulan2');
+            $table->string('triwulan3');
+            $table->string('triwulan4');
+            $table->string('anggaran');
+            $table->string('nilai');
+            $table->string('idPd');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indikator_surats');
+        Schema::dropIfExists('realisasi_anggarans');
     }
 };

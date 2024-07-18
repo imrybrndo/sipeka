@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('jabatanPihakPertama');
             $table->string('pihakKedua');
             $table->string('jabatanPihakKedua');
+            $table->string('idPd');
             $table->timestamps();
         });
     }

@@ -20,6 +20,10 @@
                             No
                         </th>
                         <th>Nama Program</th>
+                        <th>Triwulan I</th>
+                        <th>Triwulan II</th>
+                        <th>Triwulan III</th>
+                        <th>Triwulan IV</th>
                         <th>Target Anggaran</th>
                         <th>Anggaran</th>
                         <th class="text-center">Aksi</th>
@@ -36,6 +40,10 @@
                                 <div class="font-bold">{{$item->namaProgram}}</div>
                             </div>
                         </td>
+                        <td>{{$item->triwulan1}}</td>
+                        <td>{{$item->triwulan2}}</td>
+                        <td>{{$item->triwulan3}}</td>
+                        <td>{{$item->triwulan4}}</td>
                         <td>{{$item->targetAnggaran}}</td>
                         <td>
                             {{$item->anggaran}}
@@ -64,9 +72,47 @@
 
                                             <label class="form-control w-full">
                                                 <div class="label">
+                                                    <span class="label-text">TRIWULAN I</span>
+                                                </div>
+                                                <input type="text" value="{{old('triwulan1', $item->triwulan1)}}"
+                                                    id="idrInput" name="triwulan1" class="input input-bordered w-full"
+                                                    placeholder="Rp" />
+                                            </label>
+
+                                            <label class="form-control w-full">
+                                                <div class="label">
+                                                    <span class="label-text">TRIWULAN II</span>
+                                                </div>
+                                                <input type="text" value="{{old('triwulan2', $item->triwulan2)}}"
+                                                    id="idrInput" name="triwulan2" class="input input-bordered w-full"
+                                                    placeholder="Rp" />
+                                            </label>
+
+                                            <label class="form-control w-full">
+                                                <div class="label">
+                                                    <span class="label-text">TRIWULAN III</span>
+                                                </div>
+                                                <input type="text" value="{{old('triwulan3', $item->triwulan3)}}"
+                                                    id="idrInput" name="triwulan3" class="input input-bordered w-full"
+                                                    placeholder="Rp" />
+                                            </label>
+
+                                            <label class="form-control w-full">
+                                                <div class="label">
+                                                    <span class="label-text">TRIWULAN IV</span>
+                                                </div>
+                                                <input type="text" value="{{old('triwulan4', $item->triwulan4)}}"
+                                                    id="idrInput" name="triwulan4" class="input input-bordered w-full"
+                                                    placeholder="Rp" />
+                                            </label>
+
+                                            <label class="form-control w-full">
+                                                <div class="label">
                                                     <span class="label-text">Target Anggaran</span>
                                                 </div>
-                                                <input type="text" value="{{old('targetAnggaran', $item->targetAnggaran)}}" id="idrInput" name="targetAnggaran"
+                                                <input type="text"
+                                                    value="{{old('targetAnggaran', $item->targetAnggaran)}}"
+                                                    id="idrInput" name="targetAnggaran"
                                                     class="input input-bordered w-full" placeholder="Rp" />
                                             </label>
 
@@ -74,8 +120,9 @@
                                                 <div class="label">
                                                     <span class="label-text">Anggaran</span>
                                                 </div>
-                                                <input type="text" value="{{old('anggaran', $item->anggaran)}}" id="idrInput" name="anggaran"
-                                                    class="input input-bordered w-full" placeholder="Rp" />
+                                                <input type="text" value="{{old('anggaran', $item->anggaran)}}"
+                                                    id="idrInput" name="anggaran" class="input input-bordered w-full"
+                                                    placeholder="Rp" />
                                             </label>
 
                                             <div class="flex justify-start items-start gap-2">

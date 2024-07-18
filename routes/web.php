@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/cetak', function(){
+Route::get('/cetak', function () {
     return view('pengguna.cetaksurat.index');
 });
 
@@ -30,8 +30,9 @@ Route::middleware('auth', 'verified', 'role:admin')->group(function () {
 Route::middleware('auth', 'verified', 'role:pengguna')->group(function () {
     Route::get('/beranda', [DashboardPenggunaController::class, 'index'])->name('beranda');
     Route::get('/cascading', [CascadingController::class, 'index'])->name('cascading.index');
-    Route::get('/pohon', [PohonKinerjaController::class, 'index'])->name('pohon.index'); 
+    Route::get('/pohon', [PohonKinerjaController::class, 'index'])->name('pohon.index');
 
+    Route::resource('/hapus_cascading', \App\Http\Controllers\Pengguna\Cascading\HapusDataController::class);
     Route::resource('/print', \App\Http\Controllers\Pengguna\CetakSurat\CetakSuratController::class);
     Route::resource('/pegawai', \App\Http\Controllers\Pengguna\DataPegawaiController::class);
     Route::resource('/surat', \App\Http\Controllers\Pengguna\SuratPerjanjian\SuratPerjanjianKinerjaController::class);
@@ -39,26 +40,15 @@ Route::middleware('auth', 'verified', 'role:pengguna')->group(function () {
     Route::resource('/sasaran', \App\Http\Controllers\Pengguna\SasaranStrategis\SasaranStrategisSuratController::class);
     Route::resource('/indikator', \App\Http\Controllers\Pengguna\IndikatorKinerja\IndikatorKinerjaSurat::class);
     Route::resource('/program', \App\Http\Controllers\Pengguna\ProgramController::class);
-    Route::resource('/realisasi', \App\Http\Controllers\Pengguna\RealisasiAnggaran\RealisasiAnggaranController::class);
-
+    Route::resource('/cascading_detail', \App\Http\Controllers\Pengguna\CascadingDetail\CascadingController::class);
     Route::resource('/tujuan_cascading', \App\Http\Controllers\Pengguna\Cascading\TujuanController::class);
     Route::resource('/sasaran_cascading', \App\Http\Controllers\Pengguna\Cascading\SasaranStrategisController::class);
     Route::resource('/sasaran_program', \App\Http\Controllers\Pengguna\Cascading\SasaranProgramController::class);
     Route::resource('/sasaran_kegiatan', \App\Http\Controllers\Pengguna\Cascading\SasaranKegiatanController::class);
+    Route::resource('/realisasi', App\Http\Controllers\Pengguna\Realisasi\RealisasiController::class);
+    Route::resource('/realisasi_kegiatan', \App\Http\Controllers\Pengguna\Realisasi\RealisasaiKegiatan::class);
+    Route::resource('/rekap-realisasi', App\Http\Controllers\Pengguna\Realisasi\RekapRealisasiKeuanganController::class);
+    Route::resource('/rekap-hasil', \App\Http\Controllers\Pengguna\Realisasi\RekapHasilSasaranController::class);
 });
-
-// useless routes
-// Just to demo sidebar dropdown links active states.
-Route::get('/buttons/text', function () {
-    return view('buttons-showcase.text');
-})->middleware(['auth'])->name('buttons.text');
-
-Route::get('/buttons/icon', function () {
-    return view('buttons-showcase.icon');
-})->middleware(['auth'])->name('buttons.icon');
-
-Route::get('/buttons/text-icon', function () {
-    return view('buttons-showcase.text-icon');
-})->middleware(['auth'])->name('buttons.text-icon');
 
 require __DIR__ . '/auth.php';

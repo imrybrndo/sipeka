@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class SasaranStrategisSurat extends Model
@@ -12,8 +13,9 @@ class SasaranStrategisSurat extends Model
     use HasFactory;
     protected $fillable = [
         'sasaranStrategis',
-        'idSurat',
+        'kategori',
         'idTujuan',
+        'idSurat',
         'idPd',
     ];
     /**
@@ -21,18 +23,14 @@ class SasaranStrategisSurat extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function sasaran(): BelongsTo
-    {
-        return $this->belongsTo(Tujuan::class, 'id',);
-    }
 
     /**
      * Get the indikator associated with the SasaranStrategisSurat
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function indikator(): HasOne
+    public function indikator(): HasMany
     {
-        return $this->hasOne(IndikatorSurat::class, 'idSasaran');
+        return $this->hasMany(IndikatorSurat::class, 'idSasaran');
     }
 }

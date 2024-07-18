@@ -125,8 +125,27 @@
                                                             class="input input-bordered w-full" />
                                                     </label>
                                                 </div>
+                                                <label class="form-control w-full">
+                                                    <div class="label">
+                                                        <span class="label-text">Status</span>
+                                                    </div>
+                                                    <select class="select select-bordered" name="status">
+                                                        <option disabled {{old('status', $item->status) ? '' : 'selected'}}>Pilih</option>
+                                                        <option value="SEKRETARIS DAERAH" {{old('status', $item->status) == 'SEKRETARIS DAERAH' ? 'selected' : '' }}>SEKRETARIS DAERAH</option>
+                                                        <option value="KETUA SEKRETARIS DEWAN" {{old('status', $item->status) == 'KETUA SEKRETARIS DWAN' ? 'selected' : ''}}>KETUA SEKRETARIS DEWAN</option>
+                                                        <option value="ASISTEN SEKRETARIS DAERAH" {{old('status', $item->status) == 'ASISTEN SEKRETARIS' ? 'selected' : ''}}>ASISTEN SEKRETARIS DAERAH</option>
+                                                        <option value="KEPALA BADAN" {{old('status', $item->status) == 'KEPALA BADAN' ? 'selected' : ''}}>KEPALA BADAN</option>
+                                                        <option value="KEPALA DINAS" {{old('status', $item->status) == 'KEPALA DINAS' ? 'selected' : ''}}>KEPALA DINAS</option>
+                                                        <option value="CAMAT" {{old('status', $item->status) == 'CAMAT' ? 'selected' : ''}}>CAMAT</option>
+                                                        <option value="KEPALA BAGIAN" {{old('status', $item->status) == 'KEPALA BAGIAN' ? 'selected' : ''}}>KEPALA BAGIAN</option>
+                                                        <option value="KEPALA BIDANG" {{old('status', $item->status) == 'KEPALA BIDANG' ? 'selected' : ''}}>KEPALA BIDANG</option>
+                                                        <option value="JABATAN FUNGSIONAL" {{old('status', $item->status) == 'JABATAN FUNGSIONAL' ? 'selected' : '' }}>JABATAN FUNGSIONAL</option>
+                                                        <option value="KEPALA SEKSI" {{old('status', $item->status) == 'KEPALA SEKSI' ? : ''}}>KEPALA SEKSI</option>
+                                                        <option value="JABATAN PELAKSANA" {{old('status', $item->status) == 'JABATAN PELAKSANA' ? : ''}}>JABATAN PELAKSANA</option>
+                                                    </select>
+                                                </label>
                                                 <div class="flex justify-start items-start gap-2">
-                                                    <button class="btn btn-neutral mt-6">Simpan</button>
+                                                    <button class="btn btn-block btn-neutral mt-6">Simpan</button>
                                                 </div>
                                             </form>
                                         </div>

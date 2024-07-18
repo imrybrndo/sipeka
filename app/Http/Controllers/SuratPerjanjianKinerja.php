@@ -28,7 +28,8 @@ class SuratPerjanjianKinerja extends Controller
      */
     public function create()
     {
-        $data = Pegawai::all();
+        $id = auth()->user()->id;
+        $data = Pegawai::where('idPd', $id);
         return view('pengguna.perjanjian.create', compact('data'));
     }
 

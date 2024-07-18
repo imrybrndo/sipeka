@@ -105,7 +105,8 @@ class DataPegawaiController extends Controller
             'namaPegawai' => 'required',
             'pangkatGolongan' => 'required',
             'status' => 'required',
-            'jabatan' => 'required'
+            'jabatan' => 'required',
+            'status' => 'required'
         ]);
         $data = Pegawai::findOrFail($id);
         $data->update([

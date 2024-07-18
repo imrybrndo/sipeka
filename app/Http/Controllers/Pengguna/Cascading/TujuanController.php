@@ -39,12 +39,24 @@ class TujuanController extends Controller
         $this->validate($request, [
             'tujuan.*' => 'required'
         ]);
-        foreach ($request->input('tujuan') as $tujuan) {
-            CasCadingTujuan::create([
-                'name' => $tujuan,
-                'parent' => 1,
-                'idPd' => auth()->user()->id
-            ]);
+        $existsData = CasCadingTujuan::exists();
+        if ($existsData) {
+            $max_key = CasCadingTujuan::max('key');
+            foreach ($request->input('tujuan') as $tujuan) {
+                CasCadingTujuan::create([
+                    'name' => $tujuan,
+                    'parent' => 1,
+                    'idPd' => auth()->user()->id
+                ]);
+            }
+        } elseif (!$existsData) {
+            foreach ($request->input('tujuan') as $tujuan) {
+                CasCadingTujuan::create([
+                    'name' => $tujuan,
+                    'parent' => 1,
+                    'idPd' => auth()->user()->id
+                ]);
+            }
         }
         return redirect()->route('cascading.index')->with('toast_success', 'Berhasil');
     }
@@ -89,10 +101,10 @@ class TujuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $data = CasCadingTujuan::findOrFail($id);
+        $data = CasCadingTujuan::where('key', $id);
         $data->delete();
-        return redirect()->route('cascading.index')->with('toast_success', 'Tujuan berhasil dihapus!');
+        return redirect()->route('cascading.index')->with('toast_success', 'Berhasil!!');
     }
 }

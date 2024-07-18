@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Pengguna;
+namespace App\Http\Controllers\Pengguna\Realisasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Program;
-use Illuminate\Http\RedirectResponse;
+use App\Models\IndikatorSurat;
+use App\Models\RealisasiAnggaran;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
-class ProgramController extends Controller
+class RealisasiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +21,14 @@ class ProgramController extends Controller
         $no = 1;
         $id = auth()->user()->id;
         $search = $request->input('search');
-        $data = Program::where('idPd', $id)
-        ->where(function ($query) use ($search) {
-            $query->where('namaProgram', 'like', '%' . $search . '%')
-                ->orWhere('anggaran', 'like', '%' . $search . '%');
-        })->paginate(10);
-        return view('pengguna.program.index', [
-            'no' => $no,
-            'data' => $data
+        $data = RealisasiAnggaran::where('idPd', $id)
+            ->where(function ($query) use ($search) {
+                $query->where('realisasiFisik', 'LIKE', '%' . $search . '%')
+                    ->orWhere('triwulan1', 'LIKE', '%' . $search . '%');
+            })->paginate(10);
+        return view('pengguna.realisasi.index', [
+            'data' => $data,
+            'no' => $no
         ]);
     }
 
@@ -37,7 +39,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        return view('pengguna.program.create');
+        return view('pengguna.realisasi.create');
     }
 
     /**
@@ -49,26 +51,32 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'namaProgram' => 'required',
+            'realisasiFisik' => 'required',
             'triwulan1' => 'required',
             'triwulan2' => 'required',
             'triwulan3' => 'required',
             'triwulan4' => 'required',
-            'targetAnggaran' => 'required',
             'anggaran' => 'required'
         ]);
 
-        Program::create([
-            'namaProgram' => $request->namaProgram,
-            'targetAnggaran' => $request->targetAnggaran,
+        $tw1 = $request->input('triwulan1');
+        $tw2 = $request->input('triwulan2');
+        $tw3 = $request->input('triwulan3');
+        $tw4 = $request->input('triuwlan4');
+        $anggaran = $request->input('anggaran');
+        $result = $tw1 + $tw2 + $tw3 + $tw4;
+        $hasil = $anggaran / $result;
+        RealisasiAnggaran::create([
+            'realisasiFisik' => $request->realisasiFisik,
             'triwulan1' => $request->triwulan1,
             'triwulan2' => $request->triwulan2,
             'triwulan3' => $request->triwulan3,
             'triwulan4' => $request->triwulan4,
             'anggaran' => $request->anggaran,
+            'nilai' => $hasil,
             'idPd' => auth()->user()->id
         ]);
-        return redirect()->route('program.index')->with('toast_success', 'Program berhasil ditambahkan!');
+        return redirect()->route('realisasi.index')->with('toast_success', 'Berhasil!!');
     }
 
     /**
@@ -88,9 +96,8 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -102,9 +109,8 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'namaProgram' => 'required',
-            'targetAnggaran' => 'required',
+        $this->validate($request, [
+            'realisasiFisik' => 'required',
             'triwulan1' => 'required',
             'triwulan2' => 'required',
             'triwulan3' => 'required',
@@ -112,18 +118,17 @@ class ProgramController extends Controller
             'anggaran' => 'required'
         ]);
 
-        $data = Program::findOrFail($id);
+        $data = RealisasiAnggaran::findOrFail($id);
         $data->update([
-            'namaProgram' => $request->namaProgram,
+            'realisasiFisik' => $request->realisasiFisik,
             'triwulan1' => $request->triwulan1,
             'triwulan2' => $request->triwulan2,
             'triwulan3' => $request->triwulan3,
             'triwulan4' => $request->triwulan4,
-            'targetAngggaran' => $request->targetAnggaran,
-            'anggaran' => $request->anggaran,
-            'idPd' => auth()->user()->id
+            'anggaran' => $request->anggaran
         ]);
-        return redirect()->route('program.index')->with('toast_success', 'Program berhasil diubah!');
+
+        return redirect()->route('realisasi.index')->with('toast_success', 'Berhasil!!');
     }
 
     /**
@@ -134,8 +139,8 @@ class ProgramController extends Controller
      */
     public function destroy($id)
     {
-        $data = Program::findOrFail($id);
+        $data = RealisasiAnggaran::findOrFail($id);
         $data->delete();
-        return redirect()->route('program.index')->with('toast_success', 'Program berhasil dihapus!');
+        return redirect()->route('realisasi.index')->with('toast_success', 'Berhasil!!');
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('tujuan');
             $table->string('idSurat');
-            $table->string('idPd');
+            $table->integer('idPd');
             $table->timestamps();
         });
     }

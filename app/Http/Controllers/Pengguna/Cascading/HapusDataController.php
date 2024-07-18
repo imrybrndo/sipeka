@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Pengguna\Cascading;
 
 use App\Http\Controllers\Controller;
+use App\Models\CasCadingTujuan;
+use App\Models\SasaranKegiatan;
 use App\Models\SasaranProgram;
 use App\Models\SasaranStrategis;
 use Illuminate\Http\Request;
 
-class SasaranProgramController extends Controller
+class HapusDataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,34 +39,7 @@ class SasaranProgramController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'sasaranProgram.*' => 'required'
-        ]);
-        $existData = SasaranProgram::exists();
-        if ($existData) {
-            $max_key = SasaranProgram::max('key');
-            foreach ($request->input('sasaranProgram') as $program) {
-                $max_key++;
-                SasaranProgram::create([
-                    'key' => $max_key,
-                    'name' => $program,
-                    'parent' => $request->input('sasaranStrategis'),
-                    'idPd' => auth()->user()->id
-                ]);
-            }
-        } elseif (!$existData) {
-            $lastkey = SasaranStrategis::max('key');
-            foreach ($request->input('sasaranProgram') as $program) {
-                $lastkey++;
-                SasaranProgram::create([
-                    'key' => $lastkey,
-                    'name' => $program,
-                    'parent' => $request->input('sasaranStrategis'),
-                    'idPd' => auth()->user()->id
-                ]);
-            }
-        }
-        return redirect()->route('cascading.index')->with('toast_success', 'Sasaran program berhasil ditambah!!');
+        //
     }
 
     /**
@@ -109,8 +84,14 @@ class SasaranProgramController extends Controller
      */
     public function destroy($id)
     {
-        $data = SasaranProgram::where('key', $id);
+        $data = CasCadingTujuan::where('idPd',$id);
+        $strategis = SasaranStrategis::where('idPd',$id);
+        $program = SasaranProgram::where('idPd',$id);
+        $kegiatan = SasaranKegiatan::where('idPd',$id);
         $data->delete();
+        $strategis->delete();
+        $program->delete();
+        $kegiatan->delete();
         return redirect()->route('cascading.index')->with('toast_success', 'Berhasil!!');
     }
 }

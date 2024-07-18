@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Pengguna\RealisasiAnggaran;
+namespace App\Http\Controllers\Pengguna\Realisasi;
 
 use App\Http\Controllers\Controller;
+use App\Models\RealisasiAnggaran;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class RealisasiAnggaranController extends Controller
+class RekapRealisasiKeuanganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -57,7 +59,6 @@ class RealisasiAnggaranController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -69,7 +70,19 @@ class RealisasiAnggaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = auth()->user()->id;
+        $data = User::findOrFail($id);
+
+        $realisasi = RealisasiAnggaran::where('idPd', $id)->get();
+        $jumlah_realisasi = RealisasiAnggaran::where('idPd', $id)->sum('nilai');
+        $jumlahProgram = $realisasi->count();
+
+        $grade = $jumlah_realisasi / $jumlahProgram;
+
+        $data->update([
+            'gradePd' => $grade
+        ]);
+        return redirect()->route('realisasi.index')->with('toast_success', 'Berhasil!!');
     }
 
     /**

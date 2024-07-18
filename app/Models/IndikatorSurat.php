@@ -15,7 +15,12 @@ class IndikatorSurat extends Model
         'target',
         'idSasaran',
         'idSurat',
-        'idPd'
+        'idPd',
+        'triwulan1',
+        'triwulan2',
+        'triwulan3',
+        'triwulan4',
+        'nilai'
     ];
     /**
      * Get the sasaran that owns the IndikatorSurat
