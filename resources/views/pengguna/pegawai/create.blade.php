@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
-        <form action="{{route('pegawai.store')}}" method="post">
+        <form action="{{ route('pegawai.store') }}" method="post">
             @csrf
             @method('POST')
             <label class="form-control w-full">
@@ -53,9 +53,36 @@
 
             <label class="form-control w-full">
                 <div class="label">
-                    <span class="label-text">Jabatan</span>
+                    <span class="label-text">Status</span>
                 </div>
-                <input type="text" name="jabatan" class="input input-bordered w-full" />
+                <select class="select select-bordered" name="jabatan">
+                    <option>Pilih</option>
+                    <option value="SEKRETARIS DAERAH">SEKRETARIS DAERAH</option>
+                    <option value="KETUA SEKRETARIS DEWAN">KETUA SEKRETARIS DEWAN</option>
+                    <option value="ASISTEN SEKRETARIS DAERAH">ASISTEN SEKRETARIS DAERAH</option>
+                    <option value="KEPALA BADAN">KEPALA BADAN</option>
+                    <option value="KEPALA DINAS">KEPALA DINAS</option>
+                    <option value="CAMAT">CAMAT</option>
+                    <option value="KEPALA BAGIAN">KEPALA BAGIAN</option>
+                    <option value="KEPALA BIDANG">KEPALA BIDANG</option>
+                    <option value="JABATAN FUNGSIONAL">JABATAN FUNGSIONAL</option>
+                    <option value="KEPALA SEKSI">KEPALA SEKSI</option>
+                    <option value="JABATAN PELAKSANA">JABATAN PELAKSANA</option>
+                    <option value="INSPEKTUR KOTA">INSPEKTUR KOTA</option>
+                    <option value="INSPEKTUR PEMBANTU WILAYAH">INSPEKTUR PEMBANTU WILAYAH</option>
+                    <option value="SEKRETARIS BADAN">SEKRETARIS BADAN</option>
+                    <option value="SEKRETARIS DINAS">SEKRETARIS DINAS</option>
+                    <option value="SEKRETARIS KECAMATAN">SEKRETARIS KECAMATAN</option>
+                    <option value="LURAH">LURAH</option>
+                    <option value="KEPALA SEKOLAH">KEPALA SEKOLAH</option>
+                    <option value="SEKRETARIS INSPEKTORAT">SEKRETARIS INSPEKTORAT</option>
+                    <option value="SEKRETARIS SATUAN">SEKRETARIS SATUAN</option>
+                    <option value="PELAKSANA">PELAKSANA</option>
+                    <option value="FUNGSIONAL">FUNGSIONAL</option>
+                    <option value="KEPALA SUB BIDANG">KEPALA SUB BIDANG</option>
+                    <option value="SEKRETARIS KELURAHAN">SEKRETARIS KELURAHAN</option>
+                    <option value="KEPALA SATUAN">KEPALA SATUAN</option>
+                </select>
             </label>
 
             <label class="form-control w-full">
@@ -75,12 +102,26 @@
                     <option value="JABATAN FUNGSIONAL">JABATAN FUNGSIONAL</option>
                     <option value="KEPALA SEKSI">KEPALA SEKSI</option>
                     <option value="JABATAN PELAKSANA">JABATAN PELAKSANA</option>
+                    <option value="INSPEKTUR KOTA">INSPEKTUR KOTA</option>
+                    <option value="INSPEKTUR PEMBANTU WILAYAH">INSPEKTUR PEMBANTU WILAYAH</option>
+                    <option value="SEKRETARIS BADAN">SEKRETARIS BADAN</option>
+                    <option value="SEKRETARIS DINAS">SEKRETARIS DINAS</option>
+                    <option value="SEKRETARIS KECAMATAN">SEKRETARIS KECAMATAN</option>
+                    <option value="LURAH">LURAH</option>
+                    <option value="KEPALA SEKOLAH">KEPALA SEKOLAH</option>
+                    <option value="SEKRETARIS INSPEKTORAT">SEKRETARIS INSPEKTORAT</option>
+                    <option value="SEKRETARIS SATUAN">SEKRETARIS SATUAN</option>
+                    <option value="PELAKSANA">PELAKSANA</option>
+                    <option value="FUNGSIONAL">FUNGSIONAL</option>
+                    <option value="KEPALA SUB BIDANG">KEPALA SUB BIDANG</option>
+                    <option value="SEKRETARIS KELURAHAN">SEKRETARIS KELURAHAN</option>
+                    <option value="KEPALA SATUAN">KEPALA SATUAN</option>
                 </select>
             </label>
 
             <div class="flex gap-2 mt-2">
                 <button type="submit" class="btn btn-neutral">Simpan</button>
-                <a href="{{route('pegawai.index')}}" class="btn">Kembali</a>
+                <a href="{{ route('pegawai.index') }}" class="btn">Kembali</a>
             </div>
         </form>
     </div>

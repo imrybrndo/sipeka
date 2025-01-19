@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Models\SasaranStrategisSurat;
 use App\Models\SuratPerjanjian;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CetakSuratController extends Controller
@@ -61,15 +62,21 @@ class CetakSuratController extends Controller
     public function edit($id)
     {
         $no = 1;
+        $idUser = auth()->user()->id;
+        $user = User::where('id', $idUser)->first();
+        if ($user->alamat == NULL) {
+            return redirect()->route('surat.index')->with('warning', 'Anda belum melengkapi alamat SKPD untuk mencetak perjanjian kinerja, silahkan lengkapi di profil!!');
+        }
         $data = SuratPerjanjian::where('id', $id)->first();
         $surat = SasaranStrategisSurat::with('indikator')->where('idSurat', $id)->get();
-        $program = Program::where('id')->get();
+        $program = Program::where('idPd', auth()->user()->id)->get();
         $arr = $surat->toArray();
         return view('pengguna.cetaksurat.index', [
             'no' => $no,
             'data' => $data,
             'surat' => $surat,
             'program' => $program,
+            'user' => $user,
             'arr' => $arr
         ]);
     }

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Pengguna\SuratPerjanjian;
 use App\Http\Controllers\Controller;
 use App\Models\IndikatorSurat;
 use App\Models\Pegawai;
+use App\Models\Program;
+use App\Models\SasaranStrategis;
 use App\Models\SasaranStrategisSurat;
 use App\Models\SuratPerjanjian;
 use App\Models\Tujuan;
+use App\Models\UploadPerjanjianKinerja;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +25,6 @@ class SuratPerjanjianKinerjaController extends Controller
     public function index(Request $request)
     {
         $id = auth()->user()->id;
-        // $data = SuratPerjanjian::where('idPd', $id)->get();
         $search = $request->input('search');
         $data = SuratPerjanjian::where('idPd', $id)
             ->where(function ($query) use ($search) {
@@ -45,7 +48,8 @@ class SuratPerjanjianKinerjaController extends Controller
      */
     public function create()
     {
-        $data = Pegawai::all();
+        $id = auth()->user()->id;
+        $data = Pegawai::where('idPd', $id)->get();
         return view('pengguna.perjanjian.create', compact('data'));
     }
 
@@ -69,9 +73,12 @@ class SuratPerjanjianKinerjaController extends Controller
             'jabatanPihakPertama' => $request->jabatanPihakPertama,
             'pihakKedua' => $request->pihakKedua,
             'jabatanPihakKedua' => $request->jabatanPihakKedua,
+            'tahun' => 2025,
+            'status' => 0,
             'idPd' => auth()->user()->id
         ]);
-        return redirect()->route('surat.index')->with('toast_success', 'Surat perjanjian berhasil dibuat!');
+
+        return redirect()->route('surat.index')->with('success', 'Proses berhasil!');
     }
 
     /**
@@ -82,7 +89,12 @@ class SuratPerjanjianKinerjaController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = UploadPerjanjianKinerja::where('idSurat', $id)->first();
+        $dataSurat = $data->toJson();
+        return view('pengguna.perjanjian.show', [
+            'data' => $data,
+            'dataSurat' => $dataSurat
+        ]);
     }
 
     /**
@@ -93,13 +105,29 @@ class SuratPerjanjianKinerjaController extends Controller
      */
     public function edit($id)
     {
-        $data = SuratPerjanjian::findOrFail($id);
-        $sasaran = SasaranStrategisSurat::where('idSurat', $id)->get();
-        $indikator = IndikatorSurat::where('idSurat', $id)->get();
+        // $data = SuratPerjanjian::findOrFail($id);
+        // $sasaran = SasaranStrategisSurat::where('idSurat', $id)->get();
+        // $indikator = IndikatorSurat::where('idSurat', $id)->get();
+        // return view('pengguna.perjanjian.edit', [
+        //     'data' => $data,
+        //     'sasaran' => $sasaran,
+        //     'indikator' => $indikator
+        // ]);
+
+        $no = 1;
+        $idUser = auth()->user()->id;
+        $user = User::where('id', $idUser)->first();
+        $data = SuratPerjanjian::where('id', $id)->first();
+        $surat = SasaranStrategisSurat::with('indikator')->where('idSurat', $id)->get();
+        $program = Program::where('idPd', $idUser)->get();
+        $arr = $surat->toArray();
         return view('pengguna.perjanjian.edit', [
+            'no' => $no,
             'data' => $data,
-            'sasaran' => $sasaran,
-            'indikator' => $indikator
+            'surat' => $surat,
+            'program' => $program,
+            'user' => $user,
+            'arr' => $arr
         ]);
     }
 
@@ -112,7 +140,8 @@ class SuratPerjanjianKinerjaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        // dd($data);
     }
 
     /**
@@ -129,6 +158,6 @@ class SuratPerjanjianKinerjaController extends Controller
         $data->delete();
         $sasaran->delete();
         $indikator->delete();
-        return redirect()->route('surat.index')->with('toast_success', 'Berhasil');
+        return redirect()->route('surat.index')->with('success', 'Berhasil menghapus data!');
     }
 }

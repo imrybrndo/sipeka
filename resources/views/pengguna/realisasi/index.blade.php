@@ -15,7 +15,7 @@
                 <form action="{{ route('rekap-realisasi.update', auth()->user()->id) }}" method="post">
                     @csrf
                     @method('PATCH')
-                    <button class="btn">Rekap Realisasi</button>
+                    <button class="btn">Hitung Realisasi</button>
                 </form>
             </div>
 
@@ -46,11 +46,21 @@
                             <tr>
                                 <th>{{ $no++ }}</th>
                                 <td>{{ $item->realisasiFisik }}</td>
-                                <td>{{ $item->triwulan1 }}</td>
-                                <td>{{ $item->triwulan2 }}</td>
-                                <td>{{ $item->triwulan3 }}</td>
-                                <td>{{ $item->triwulan4 }}</td>
-                                <td>{{ $item->anggaran }}</td>
+                                <td>
+                                    @currency($item->triwulan1)
+                                </td>
+                                <td>
+                                    @currency($item->triwulan2)
+                                </td>
+                                <td>
+                                    @currency($item->triwulan3)
+                                </td>
+                                <td>
+                                    @currency($item->triwulan4)
+                                </td>
+                                <td>
+                                    @currency($item->anggaran)
+                                </td>
                                 <td>
                                     <div class="flex gap-2">
                                         <!-- Open the modal using ID.showModal() method -->
@@ -160,20 +170,4 @@
             </div>
         </div>
     </div>
-    <script>
-        document.querySelectorAll('input[id="idrInput"]').forEach(input => {
-            input.addEventListener('input', function(e) {
-                let value = e.target.value;
-                value = value.replace(/\D/g, '');
-                value = new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                }).format(value);
-                value = value.replace(/^Rp\s?|(,00)/g, '');
-                e.target.value = `Rp ${value}`;
-            });
-        });
-    </script>
 </x-app-layout>

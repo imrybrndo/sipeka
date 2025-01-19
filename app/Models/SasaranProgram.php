@@ -12,6 +12,18 @@ class SasaranProgram extends Model
         'key',
         'name',
         'parent',
+        'indikator',
+        'croscut',
         'idPd'
     ];
+
+    public function sasaranStrategis()
+    {
+        return $this->hasOne(SasaranStrategis::class, 'key', 'parent');
+    }
+
+    public function sasaranKegiatan()
+    {
+        return $this->hasOne(SasaranKegiatan::class, 'parent', 'key');
+    }
 }

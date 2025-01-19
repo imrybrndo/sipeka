@@ -74,12 +74,18 @@ class RekapHasilSasaranController extends Controller
         $userID = auth()->user()->id;
         $nilaiSasaran = SasaranStrategisSurat::where('idSurat', $id)->sum('nilai');
         $jumlahSasaran = SasaranStrategisSurat::where('idSurat', $id)->count();
-        $hasilSasaranStrategis = $nilaiSasaran / $jumlahSasaran;
+
+        if ($jumlahSasaran == 1) {
+            $hasilSasaranStrategis = $nilaiSasaran / $jumlahSasaran;
+        } else {
+            $hasilSasaranStrategis = $nilaiSasaran / $jumlahSasaran;
+        }
+
         $data = User::findOrFail($userID);
         $data->update([
             'capaianPd' => $hasilSasaranStrategis
         ]);
-        return redirect()->route('realisasi.index')->with('toast_success', 'Berhasil!!');
+        return redirect()->route('realisasi_kegiatan.index')->with('success', 'Berhasil menghitung realisasi kegiatan!!');
     }
 
     /**

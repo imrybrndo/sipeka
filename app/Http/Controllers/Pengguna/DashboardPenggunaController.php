@@ -16,13 +16,14 @@ class DashboardPenggunaController extends Controller
         $grade = User::where('id', $id)->first();
         $result_grade = $grade->gradePd;
         $maxgrade = 100;
-        $persentase = ($result_grade / $maxgrade) * 100;
+        $persentase = $result_grade / 200 * 100;
+        $resultData = $persentase / 100;
         $first_digit = intval($persentase);
 
         $capaian = User::where('id', $id)->first();
         $hasilCapaian = $capaian->capaianPd;
         $result = ($hasilCapaian / $maxgrade) * 100;
         $two_digit = intval($result);
-        return view('pengguna.index', ['row' => $row, 'grade' => $first_digit, 'capaianPd' => $two_digit]);
+        return view('pengguna.index', ['row' => $row, 'grade' => $first_digit, 'capaianPd' => $two_digit, 'result' => $resultData]);
     }
 }

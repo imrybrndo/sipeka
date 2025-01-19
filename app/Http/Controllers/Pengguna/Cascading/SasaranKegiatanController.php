@@ -49,6 +49,8 @@ class SasaranKegiatanController extends Controller
                     'key' => $max_key,
                     'name' => $kegiatan,
                     'parent' => $request->input('sasaranProgram'),
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'idPd' => auth()->user()->id
                 ]);
             }
@@ -60,6 +62,8 @@ class SasaranKegiatanController extends Controller
                     'key' => $lastKey,
                     'name' => $kegiatan,
                     'parent' => $request->input('sasaranProgram'),
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'idPd' => auth()->user()->id
                 ]);
             }

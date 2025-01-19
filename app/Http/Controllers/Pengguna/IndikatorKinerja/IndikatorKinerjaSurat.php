@@ -41,7 +41,8 @@ class IndikatorKinerjaSurat extends Controller
         $this->validate($request, [
             'indikatorKinerja.*' => 'required',
             'satuan.*' => 'required',
-            'target.*' => 'required'
+            'target.*' => 'required',
+            'kategori' => 'required'
         ]);
         $data = $request->all();
         foreach ($data['indikatorKinerja'] as $index => $itemIndikator) {
@@ -55,7 +56,7 @@ class IndikatorKinerjaSurat extends Controller
             $indikatorKinerja->idPd = auth()->user()->id;
             $indikatorKinerja->save();
         }
-        return redirect()->route('surat.index')->with('toast_success', 'Berhasil!');
+        return redirect()->route('surat.index')->with('success', 'Berhasil menambahkan indikator!!');
     }
 
     /**
@@ -89,7 +90,20 @@ class IndikatorKinerjaSurat extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'indikatorKinerja' => 'required',
+            'satuan' => 'required',
+            'target' => 'required'
+        ]);
+        $indikatorID = $request->input('idIndikator');
+        $data = IndikatorSurat::where('id', $indikatorID);
+        $data->update([
+            'indikatorKinerja' => $request->indikatorKinerja,
+            'satuan' => $request->satuan,
+            'target' => $request->target
+        ]);
+
+        return redirect()->route('surat.index')->with('success', 'Berhasil!!');
     }
 
     /**

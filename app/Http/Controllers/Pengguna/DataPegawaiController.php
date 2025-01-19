@@ -49,7 +49,7 @@ class DataPegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'nip' => 'required',
             'namaPegawai' => 'required',
             'pangkatGolongan' => 'required',
@@ -66,7 +66,7 @@ class DataPegawaiController extends Controller
             'idPd' => auth()->user()->id
         ]);
 
-        return redirect()->route('pegawai.index')->with('toast_success', 'Pegawai berhasil ditambah!!');
+        return redirect()->route('pegawai.index')->with('success', 'Proses Berhasil!!');
     }
 
     /**
@@ -100,7 +100,7 @@ class DataPegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'nip' => 'required',
             'namaPegawai' => 'required',
             'pangkatGolongan' => 'required',
@@ -117,7 +117,7 @@ class DataPegawaiController extends Controller
             'status' => $request->status,
             'idPd' => auth()->user()->id
         ]);
-        return redirect()->route('pegawai.index')->with('toast_success', 'Data pegawai berhasil diubah!');
+        return redirect()->route('pegawai.index')->with('success', 'Data berhasil diubah!');
     }
 
     /**
@@ -130,6 +130,6 @@ class DataPegawaiController extends Controller
     {
         $data = Pegawai::findOrFail($id);
         $data->delete();
-        return redirect()->route('pegawai.index')->with('toast_success', 'Pegawai berhasil dihapus!');
+        return redirect()->route('pegawai.index')->with('toast_success', 'Data berhasil dihapus!');
     }
 }

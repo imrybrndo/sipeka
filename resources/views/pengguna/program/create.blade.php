@@ -22,7 +22,7 @@
                 <div class="label">
                     <span class="label-text">Anggaran TRIWULAN I</span>
                 </div>
-                <input type="text" id="idrInput" name="triwulan1" class="input input-bordered w-full"
+                <input type="number" name="triwulan1" class="input input-bordered w-full"
                     placeholder="Rp" />
             </label>
 
@@ -30,7 +30,7 @@
                 <div class="label">
                     <span class="label-text">Target TRIWULAN II</span>
                 </div>
-                <input type="text" id="idrInput" name="triwulan2" class="input input-bordered w-full"
+                <input type="number" name="triwulan2" class="input input-bordered w-full"
                     placeholder="Rp" />
             </label>
 
@@ -38,7 +38,7 @@
                 <div class="label">
                     <span class="label-text">Target TRIWULAN III</span>
                 </div>
-                <input type="text" id="idrInput" name="triwulan3" class="input input-bordered w-full"
+                <input type="number" name="triwulan3" class="input input-bordered w-full"
                     placeholder="Rp" />
             </label>
 
@@ -46,24 +46,10 @@
                 <div class="label">
                     <span class="label-text">Target TRIWULAN IV</span>
                 </div>
-                <input type="text" id="idrInput" name="triwulan4" class="input input-bordered w-full"
+                <input type="number" name="triwulan4" class="input input-bordered w-full"
                     placeholder="Rp" />
             </label>
 
-            <label class="form-control w-full">
-                <div class="label">
-                    <span class="label-text">Target Anggaran</span>
-                </div>
-                <input type="text" id="idrInput" name="targetAnggaran" class="input input-bordered w-full"
-                    placeholder="Rp" />
-            </label>
-
-            <label class="form-control w-full">
-                <div class="label">
-                    <span class="label-text">Anggaran</span>
-                </div>
-                <input type="text" id="idrInput" name="anggaran" class="input input-bordered w-full" placeholder="Rp" />
-            </label>
             <button type="submit" class="btn btn-block btn-neutral mt-3 mb-2">Simpan</button>
             <a class="btn btn-block" href="{{route('program.index')}}">Kembali</a>
         </form>

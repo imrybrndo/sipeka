@@ -20,6 +20,7 @@ return new class extends Migration
             // $table->integer('idTujuan');
             $table->integer('idSurat');
             $table->integer('idPd');
+            $table->float('nilai');
             $table->timestamps();
         });
     }

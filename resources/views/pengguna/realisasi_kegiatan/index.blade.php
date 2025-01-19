@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <h2 class="text-xl font-semibold leading-tight">
-                {{ __('Realisasai Kinerja') }}
+                {{ __('Realisasi Kinerja') }}
             </h2>
         </div>
     </x-slot>
@@ -18,7 +18,7 @@
         <div>
             <table class="table mt-4">
                 <!-- head -->
-                <thead class="bg-red-700 text-white">
+                <thead>
                     <tr>
                         <th>
                             No
@@ -69,7 +69,7 @@
                             <td>
                                 <div class="flex gap-1 justify-center items-center">
                                     <a href="{{ route('realisasi_kegiatan.edit', $item->id) }}"
-                                        class="btn btn-neutral">detail</a>
+                                        class="btn btn-neutral">Detail</a>
                                 </div>
                             </td>
                         </tr>

@@ -15,7 +15,8 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'pengguna']);
+        // Role::create(['name' => 'admin']);
+        // Role::create(['name' => 'pengguna']);
+        Role::create(['name' => 'walikota']);
     }
 }

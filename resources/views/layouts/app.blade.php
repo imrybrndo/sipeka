@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="lofi">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
 
 <head>
     <meta charset="utf-8">
@@ -8,7 +8,8 @@
 
     <title>SIPEKA</title>
     <!-- add icon link -->
-    <link rel="icon" href="{{asset('assets/logo.png')}}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('assets/logo.png') }}" type="image/x-icon" />
+    @notifyCss
     <!-- Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
@@ -23,19 +24,36 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        .day {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .clock {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 
 <body onload="init()" class="font-sans antialiased">
+
     <div x-data="mainState" :class="{ dark: isDarkMode }" x-on:resize.window="handleWindowResize" x-cloak>
         <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-200">
             <!-- Sidebar -->
             <x-sidebar.sidebar />
 
             <!-- Page Wrapper -->
-            <div class="flex flex-col min-h-screen" :class="{
+            <div class="flex flex-col min-h-screen"
+                :class="{
                     'lg:ml-64': isSidebarOpen,
                     'md:ml-16': !isSidebarOpen
-                }" style="transition-property: margin; transition-duration: 150ms;">
+                }"
+                style="transition-property: margin; transition-duration: 150ms;">
 
                 <!-- Navbar -->
                 <x-navbar />
@@ -57,7 +75,6 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
 </body>
 
 </html>

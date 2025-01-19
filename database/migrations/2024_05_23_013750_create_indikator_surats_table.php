@@ -22,6 +22,11 @@ return new class extends Migration
             $table->integer('idSasaran');
             $table->integer('idSurat');
             $table->integer('idPd');
+            $table->float('triwulan1')->nullable();
+            $table->float('triwulan2')->nullable();
+            $table->float('triwulan3')->nullable();
+            $table->float('triwulan4')->nullable();
+            $table->float('nilai')->nullable();
             $table->timestamps();
         });
     }

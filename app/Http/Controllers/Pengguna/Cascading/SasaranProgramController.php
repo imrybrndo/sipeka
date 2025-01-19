@@ -49,6 +49,8 @@ class SasaranProgramController extends Controller
                     'key' => $max_key,
                     'name' => $program,
                     'parent' => $request->input('sasaranStrategis'),
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'idPd' => auth()->user()->id
                 ]);
             }
@@ -60,11 +62,13 @@ class SasaranProgramController extends Controller
                     'key' => $lastkey,
                     'name' => $program,
                     'parent' => $request->input('sasaranStrategis'),
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'idPd' => auth()->user()->id
                 ]);
             }
         }
-        return redirect()->route('cascading.index')->with('toast_success', 'Sasaran program berhasil ditambah!!');
+        return redirect()->route('cascading.index')->with('success', 'Berhasil!!');
     }
 
     /**

@@ -6,7 +6,7 @@
             </h2>
         </div>
     </x-slot>
-    <form action="{{route('surat.store')}}" method="post">
+    <form action="{{ route('surat.store') }}" method="post">
         @csrf
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <label class="form-control w-full">
@@ -16,8 +16,10 @@
                 <select name="pihakPertama" class="select select-bordered">
                     <option>Pilih pegawai</option>
                     @foreach ($data as $item)
-                    <option value="{{$item->namaPegawai}}">{{$item->namaPegawai}} -</option>
+                        <option value="{{ $item->namaPegawai }}">{{ $item->namaPegawai }} </option>
                     @endforeach
+                        <option value="Andrei Angouw">Andrei Angouw</option>
+                        <option value="Richard Sualang">Richard Sualang</option>
                 </select>
             </label>
 
@@ -25,8 +27,7 @@
                 <div class="label">
                     <span class="label-text">JABATAN PIHAK PERTAMA</span>
                 </div>
-                <input name="jabatanPihakPertama" type="text"
-                    class="input input-bordered w-full" />
+                <input name="jabatanPihakPertama" type="text" class="input input-bordered w-full" />
             </label>
 
 
@@ -37,8 +38,10 @@
                 <select name="pihakKedua" class="select select-bordered">
                     <option>Pilih pegawai</option>
                     @foreach ($data as $item)
-                    <option value="{{$item->namaPegawai}}">{{$item->namaPegawai}} -</option>
+                        <option value="{{ $item->namaPegawai }}">{{ $item->namaPegawai }}</option>
                     @endforeach
+                        <option value="Andrei Angouw">Andrei Angouw</option>
+                        <option value="Richard Sualang">Richard Sualang</option>
                 </select>
             </label>
 
@@ -46,9 +49,10 @@
                 <div class="label">
                     <span class="label-text">JABATAN PIHAK KEDUA</span>
                 </div>
-                <input name="jabatanPihakKedua" type="text"
-                    class="input input-bordered w-full" />
+                <input name="jabatanPihakKedua" type="text" class="input input-bordered w-full" />
             </label>
+            <button type="submit" class="btn btn-neutral btn-block mt-2 mb-1">Buat Surat</button>
+            <a href="{{ route('surat.index') }}" class="btn btn-block">Kembali</a>
         </div>
 
         {{-- <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1 mt-3">
@@ -84,8 +88,5 @@
                 </script>
             </label>
         </div> --}}
-
-        <button type="submit" class="btn btn-neutral btn-block mt-2">Buat Surat</button>
-        <a href="{{route('surat.index')}}" class="btn btn-block">Kembali</a>
     </form>
 </x-app-layout>

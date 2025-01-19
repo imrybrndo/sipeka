@@ -12,6 +12,13 @@ class SasaranStrategis extends Model
         'key',
         'name',
         'parent',
+        'indikator',
+        'croscut',
         'idPd'
     ];
+
+    public function sasaranProgram()
+    {
+        return $this->belongsTo(SasaranProgram::class, 'key', 'parent');
+    }
 }

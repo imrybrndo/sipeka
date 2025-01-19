@@ -49,7 +49,7 @@ class SasaranStrategisSuratController extends Controller
             $sasaranStrategis->idPd = auth()->user()->id;
             $sasaranStrategis->save();
         }
-        return redirect()->route('surat.index')->with('toast_success', 'Berhasil!');
+        return redirect()->route('surat.index')->with('success', 'Berhasil menambahkan sasaran strategis!');
     }
 
     /**
@@ -87,8 +87,7 @@ class SasaranStrategisSuratController extends Controller
         $data->update([
             'sasaranStrategis' => $request->sasaranStrategis
         ]);
-        return redirect()->route('surat.index')->with('toast_success', 'Berhasil!');
-        // $data = SasaranStrategisSurat::findOrFail($id);
+        return redirect()->route('surat.index')->with('success', 'Berhasil mengubah sasaran strategis!');
 
     }
 

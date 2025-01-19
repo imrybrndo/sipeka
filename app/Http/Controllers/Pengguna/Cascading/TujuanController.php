@@ -45,6 +45,8 @@ class TujuanController extends Controller
             foreach ($request->input('tujuan') as $tujuan) {
                 CasCadingTujuan::create([
                     'name' => $tujuan,
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'parent' => 1,
                     'idPd' => auth()->user()->id
                 ]);
@@ -53,6 +55,8 @@ class TujuanController extends Controller
             foreach ($request->input('tujuan') as $tujuan) {
                 CasCadingTujuan::create([
                     'name' => $tujuan,
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'parent' => 1,
                     'idPd' => auth()->user()->id
                 ]);

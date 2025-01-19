@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('sasaran_programs', function (Blueprint $table) {
             $table->id('key');
             $table->string('name');
-            $table->string('parent');
-            $table->string('idPd');
+            $table->integer('parent');
+            $table->string('indikator')->nullable();
+            $table->string('croscut')->nullable();
+            $table->integer('idPd');
             $table->timestamps();
         });
     }

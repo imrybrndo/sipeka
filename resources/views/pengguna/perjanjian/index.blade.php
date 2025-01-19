@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <h2 class="text-xl font-semibold leading-tight">
-                {{ __('Buat Surat Perjanjian Kinerja') }}
+                {{ __('Perjanjian Kinerja') }}
             </h2>
         </div>
     </x-slot>
@@ -17,17 +17,18 @@
                 <button type="submit" class="btn btn-neutral">Cari</button>
             </form>
         </div>
-        <div>
-            <table class="table mt-4">
+        <div class="mt-2">
+            <table class="table mt-4 shadow-sm">
                 <!-- head -->
-                <thead class="bg-red-700 text-white">
+                <thead>
                     <tr>
                         <th>
                             No
                         </th>
-                        <th>Perjanjian</th>
-                        <th>Bulan</th>
-                        <th>Komponen</th>
+                        <th>Perjanjian Kinerja</th>
+                        {{-- <th>Bulan</th> --}}
+                        <th class="text-center">Dokumen</th>
+                        <th class="text-center">Komponen</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -54,64 +55,17 @@
                                         <div class="text-sm opacity-50">{{ $item->jabatanPihakKedua }}</div>
                                     </div>
                                 </div>
+                            </td>
                             <td>
-                                {{ \Carbon\Carbon::parse(new DateTime())->translatedFormat('F Y') }}
+                                @if ($item->status == 0)
+                                    <a href="" class="text-center">Anda belum upload dokumen</a>
+                                @elseif($item->status == 1)
+                                    <a href="{{ route('surat.show', $item->id) }}" class="text-blue-700 underline">Lihat
+                                        Dokumen</a>
+                                @endif
                             </td>
                             <td>
                                 <div class="flex flex-col ...">
-                                    {{-- TOMBOL TUJUAN --}}
-                                    {{-- <div class="dropdown dropdown-right">
-                                    <div tabindex="0" role="button" class="btn btn-xs m-1">Tujuan</div>
-                                    <ul tabindex="0"
-                                        class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                        <li><label for="my_modal_1_{{$item->id}}">Tambah</label></li>
-                                        <li><a>Hapus</a></li>
-                                    </ul>
-                                    <!-- TUJUAN -->
-                                    <input type="checkbox" id="my_modal_1_{{$item->id}}" class="modal-toggle" />
-                                    <div class="modal" role="dialog">
-                                        <div class="modal-box">
-                                            <h3 class="font-bold text-lg">Masukkan Tujuan</h3>
-                                            <p class="py-4">Silahkan memasukan tujuan surat perjanjian kinerja!</p>
-                                            <form action="{{route('tujuan.store')}}" method="post">
-                                                @csrf
-                                                <div>
-                                                    <input type="hidden" name="idSurat" value="{{$item->id}}">
-                                                    <label class="form-control w-full">
-                                                        <a class="btn btn-neutral" onclick="addInputField()">Tambah</a>
-                                                        <div id="inputFields" class="mb-2">
-                                                            <div class="label">
-                                                                <span class="label-text">Tujuan</span>
-                                                            </div>
-                                                            @for ($i = 1; $i <= 1; $i++) <input type="text"
-                                                                name="tujuan[]"
-                                                                class="input input-bordered w-full mt-2">
-                                                                @endfor
-                                                        </div>
-                                                    </label>
-                                                    <script>
-                                                        function addInputField() {
-                                                    const inputFields = document.getElementById('inputFields');
-                                                    const newInputField = document.createElement('input');
-                                                    newInputField.setAttribute('type', 'text');
-                                                    newInputField.setAttribute('placeholder', 'Type here');
-                                                    newInputField.setAttribute('class', 'input input-bordered w-full mt-2');
-                                                    newInputField.setAttribute('name', 'tujuan[]'); // Changed to use an array for multiple inputs
-                                                    inputFields.appendChild(newInputField);
-                                                }
-                                                    </script>
-                                                </div>
-                                                <div>
-                                                    <div class="modal-action">
-                                                        <button class="btn btn-neutral">Simpan</button>
-                                                        <label for="my_modal_1_{{$item->id}}" class="btn">Batal</label>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div> --}}
-
                                     {{-- TOMBOL SASARAN STRATEGIS --}}
                                     <div class="dropdown dropdown-right">
                                         <div tabindex="0" role="button" class="btn btn-xs btn-block">Sasaran
@@ -215,12 +169,14 @@
                                                     target!</p>
                                                 <form action="{{ route('indikator.store') }}" method="post">
                                                     @csrf
-                                                    <input type="hidden" name="idSurat" value="{{ $item->id }}">
+                                                    <input type="hidden" name="idSurat"
+                                                        value="{{ $item->id }}">
                                                     <label class="form-control w-full">
                                                         <div class="label">
                                                             <span class="label-text">Kategori</span>
                                                         </div>
-                                                        <select name="kategori" class="select select-bordered">
+                                                        <select name="kategori" class="select select-bordered"
+                                                            required>
                                                             <option disabled selected>Pilih</option>
                                                             <option value="penerimaLayanan">Penerima Layanan /
                                                                 Stakeholder
@@ -242,7 +198,7 @@
                                                             @endforeach
                                                         </select>
                                                     </label>
-                                                    <div class="flex gap-2">
+                                                    <div class="flex justify-center items-center gap-2">
                                                         <div class="" id="inputFieldsIndikator" class="mb-2">
                                                             <div class="label">
                                                                 <span class="label-text">Indikator Kinerja</span>
@@ -294,11 +250,10 @@
                                                             inputFieldsTarget.appendChild(newInputFieldTarget);
                                                         }
                                                     </script>
-                                                    <div class="flex gap-1 justify-end items-end">
-                                                        <button type="submit" class="btn btn-neutral">Simpan</button>
-                                                        <a href="" class="btn"
-                                                            for="my_modal_4_{{ $item->id }}">Batal</a>
-                                                    </div>
+                                                    <button type="submit"
+                                                        class="btn btn-block mb-1 btn-neutral">Simpan</button>
+                                                    <a href="" class="btn btn-block"
+                                                        for="my_modal_4_{{ $item->id }}">Batal</a>
                                                 </form>
                                             </div>
                                         </dialog>
@@ -308,10 +263,10 @@
                             </td>
                             <td>
                                 <div class="flex gap-1 justify-center items-center">
-                                    <a href="{{ route('surat.edit', $item->id) }}" class="btn btn-neutral">detail</a>
+                                    <a href="{{ route('surat.edit', $item->id) }}" class="btn shadow-sm">Lihat</a>
                                     <!-- The button to open modal -->
                                     <label for="modal_20_{{ $item->id }}"
-                                        class="btn bg-red-700 text-white">hapus</label>
+                                        class="btn bg-neutral text-white">Hapus</label>
 
                                     <!-- Put this part before </body> tag -->
                                     <input type="checkbox" id="modal_20_{{ $item->id }}" class="modal-toggle" />
@@ -332,7 +287,34 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{ route('print.edit', $item->id) }}" class="btn">cetak</a>
+                                    <a href="{{ route('print.edit', $item->id) }}"
+                                        class="btn bg-red-700 text-white">PDF</a>
+
+                                    @if ($item->status == 0)
+                                        <button class="btn btn-success text-white"
+                                            onclick="my_modal_3.showModal()">Upload
+                                            File</button>
+                                        <dialog id="my_modal_3" class="modal">
+                                            <div class="modal-box">
+                                                <form method="dialog">
+                                                    <button
+                                                        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                </form>
+                                                <h3 class="text-lg font-bold">Upload perjanjian kinerja!</h3>
+                                                <p class="py-4 text-red-700">Upload file dengan format .PDF!</p>
+                                                <form action="{{ route('upload.kinerja') }}"
+                                                    enctype="multipart/form-data" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="idSurat"
+                                                        value="{{ old('idSurat', $item->id) }}">
+                                                    <input type="file" name="upload_file"
+                                                        class="file-input file-input-bordered w-full mb-2" />
+                                                    <button class="btn btn-block btn-neutral">Upload File</button>
+                                                </form>
+                                            </div>
+                                        </dialog>
+                                    @endif
+
                                 </div>
                             </td>
                         </tr>

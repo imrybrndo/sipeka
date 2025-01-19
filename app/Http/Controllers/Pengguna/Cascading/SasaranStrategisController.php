@@ -49,6 +49,8 @@ class SasaranStrategisController extends Controller
                     'key' => $max_key,
                     'name' => $strategis,
                     'parent' => $request->input('tujuan'),
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'idPd' => auth()->user()->id
                 ]);
             }
@@ -61,6 +63,8 @@ class SasaranStrategisController extends Controller
                     'key' => $lastkey,
                     'name' => $strategis,
                     'parent' => $request->input('tujuan'),
+                    'indikator' => $request->indikator,
+                    'croscut' => $request->crosscut,
                     'idPd' => auth()->user()->id
                 ]);
             }

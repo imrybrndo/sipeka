@@ -11,7 +11,15 @@ class CasCadingTujuan extends Model
     protected $fillable = [
         'key',
         'name',
+        'indikator',
+        'croscut',
         'parent',
         'idPd'
     ];
+
+    public function sasaranStrategis()
+    {
+        return $this->hasMany(SasaranStrategis::class, 'parent', 'key');
+    }
+
 }

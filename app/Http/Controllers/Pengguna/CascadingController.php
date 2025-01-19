@@ -7,6 +7,7 @@ use App\Models\CasCadingTujuan;
 use App\Models\SasaranKegiatan;
 use App\Models\SasaranProgram;
 use App\Models\SasaranStrategis;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CascadingController extends Controller
@@ -15,6 +16,7 @@ class CascadingController extends Controller
     {
         $no = 1;
         $id = auth()->user()->id;
+        $crossCut = User::where('tipePengguna', 'pengguna')->get();
         $tujuanCascading = CasCadingTujuan::where('idPd', $id)->get();
         $sasaranStrategis = SasaranStrategis::where('idPd', $id)->get();
         $sasaranProgram = SasaranProgram::where('idPd', $id)->get();
@@ -26,7 +28,8 @@ class CascadingController extends Controller
             'tujuanCascading' => $tujuanCascading,
             'strategis' => $sasaranStrategis,
             'program' => $sasaranProgram,
-            'kegiatan' => $sasaranKegiatan
+            'kegiatan' => $sasaranKegiatan,
+            'crossCut' => $crossCut
         ]);
     }
 }

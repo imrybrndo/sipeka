@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Pengguna\Realisasi;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Pengguna\IndikatorKinerja\IndikatorKinerjaSurat;
-use App\Http\Controllers\Pengguna\SasaranStrategis\SasaranStrategisSuratController;
-use App\Models\Indikator;
 use App\Models\IndikatorSurat;
 use App\Models\SasaranStrategisSurat;
 use App\Models\SuratPerjanjian;
@@ -51,9 +48,7 @@ class RealisasaiKegiatan extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -81,14 +76,18 @@ class RealisasaiKegiatan extends Controller
         $surat = SasaranStrategisSurat::with('indikator')->where('idSurat', $id)->get();
         $arr = $surat->toArray();
         $indikator = IndikatorSurat::where('idSurat', $id)->get();
-        // $sasaran = SasaranStrategisSurat::where('idSurat', $id)->get();
+
+
+        if (!$indikator) {
+            return redirect()->route('realisasi_kegiatan.index')->with('success', 'Belum ada indikator!!');
+        }
+
         return view('pengguna.realisasi_kegiatan.edit', [
             'no' => $no,
             'data' => $data,
             'arr' => $arr,
             'indikator' => $indikator,
             'idSurat' => $idSurat
-            // 'sasaran' => $sasaran,
         ]);
     }
 
@@ -107,24 +106,29 @@ class RealisasaiKegiatan extends Controller
             'triwulan3' => 'required',
             'triwulan4' => 'required',
         ]);
+
         $idSurat = $request->input('idSurat');
+        $target = $request->input('target');
+
         $countSurat = IndikatorSurat::where('idSasaran', $idSurat)->get()->toArray();
         foreach ($countSurat as $row) {
             $data = $row['nilai'];
         }
+
         $data = IndikatorSurat::where('id', $id);
         $t1 = $request->input('triwulan1');
         $t2 = $request->input('triwulan2');
         $t3 = $request->input('triwulan3');
         $t4 = $request->input('triwulan4');
         $result = $t1 + $t2 + $t3 + $t4;
+        $finalResult = $result / $target * 100;
 
         $data->update([
             'triwulan1' => $request->triwulan1,
             'triwulan2' => $request->triwulan2,
             'triwulan3' => $request->triwulan3,
             'triwulan4' => $request->triwulan4,
-            'nilai' => $result
+            'nilai' => $finalResult
         ]);
 
 
@@ -137,7 +141,7 @@ class RealisasaiKegiatan extends Controller
             'nilai' => $hasilSasaran
         ]);
 
-        return redirect()->route('realisasi_kegiatan.index')->with('toast_success', 'Berhasi!!');
+        return redirect()->route('realisasi_kegiatan.index')->with('success', 'Berhasi menambahkan realisasi kegiatan, jangan lupa untuk update nilai realisasi kegiatan setelah mengubah atau menambahkannya!!');
     }
 
     /**

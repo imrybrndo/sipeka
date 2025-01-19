@@ -5,7 +5,7 @@
 ])
 
 @php
-    $isActiveClasses =  $isActive ? 'text-white bg-red-700 shadow-lg hover:bg-red-700' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2';
+    $isActiveClasses =  $isActive ? 'text-white bg-neutral shadow-lg hover:bg-neutral' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2';
 
     $classes = 'flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden ' . $isActiveClasses;
 

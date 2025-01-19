@@ -21,35 +21,35 @@
                 <div class="label">
                     <span class="label-text">Triwulan I</span>
                 </div>
-                <input type="text" name="triwulan1" id="idrInput" placeholder="Rp." class="input input-bordered w-full" />
+                <input type="number" name="triwulan1" id="idrInput" placeholder="Rp." class="input input-bordered w-full" />
             </label>
 
             <label class="form-control w-full">
                 <div class="label">
                     <span class="label-text">Triwulan II</span>
                 </div>
-                <input type="text" name="triwulan2" id="idrInput" placeholder="Rp." class="input input-bordered w-full" />
+                <input type="number" name="triwulan2" id="idrInput" placeholder="Rp." class="input input-bordered w-full" />
             </label>
 
             <label class="form-control w-full">
                 <div class="label">
                     <span class="label-text">Triwulan III</span>
                 </div>
-                <input type="text" name="triwulan3" id="idrInput" placeholder="Rp." class="input input-bordered w-full" />
+                <input type="number" name="triwulan3" id="idrInput" placeholder="Rp." class="input input-bordered w-full" />
             </label>
 
             <label class="form-control w-full">
                 <div class="label">
                     <span class="label-text">Triwulan IV</span>
                 </div>
-                <input type="text" id="idrInput" placeholder="Rp." name="triwulan4" class="input input-bordered w-full" />
+                <input type="number" id="idrInput" placeholder="Rp." name="triwulan4" class="input input-bordered w-full" />
             </label>
 
             <label class="form-control w-full">
                 <div class="label">
                     <span class="label-text">Anggaran</span>
                 </div>
-                <input type="text" id="idrInput" placeholder="Rp." name="anggaran" class="input input-bordered w-full" />
+                <input type="number" id="idrInput" placeholder="Rp." name="anggaran" class="input input-bordered w-full" />
             </label>
 
             <div class="mt-3">

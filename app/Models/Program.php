@@ -16,6 +16,8 @@ class Program extends Model
         'triwulan4',
         'targetAnggaran',
         'anggaran',
+        'status',
         'idPd'
     ];
+
 }

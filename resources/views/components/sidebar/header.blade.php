@@ -6,8 +6,8 @@
     >
         {{-- <x-application-logo aria-hidden="true" class="w-10 h-auto" /> --}}
         <div class="flex gap-4">
-            <img src="{{asset('assets/logo.png')}}" aria-hidden="true" class="w-10 h-auto">
-            <p class="font-black text-4xl mt-1 w-10 h-auto" aria-hidden="true">SIPEKA</p>
+            <img src="{{asset('/assets/logo.png')}}" aria-hidden="true" class="w-10 h-auto">
+            <p class="font-black text-4xl mt-1 w-10 h-auto" aria-hidden="true">SiPEKA</p>
         </div>
         <span class="sr-only">Dashboard</span>
     </a>

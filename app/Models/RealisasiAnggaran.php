@@ -9,6 +9,7 @@ class RealisasiAnggaran extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'idProgram',
         'realisasiFisik',
         'triwulan1',
         'triwulan2',

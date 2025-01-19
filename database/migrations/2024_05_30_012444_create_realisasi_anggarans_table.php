@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('realisasi_anggarans', function (Blueprint $table) {
             $table->id();
+            $table->integer('idProgram')->unique();
             $table->string('realisasiFisik');
             $table->string('triwulan1');
             $table->string('triwulan2');
             $table->string('triwulan3');
             $table->string('triwulan4');
             $table->string('anggaran');
-            $table->string('nilai');
+            $table->float('nilai');
             $table->string('idPd');
             $table->timestamps();
         });
